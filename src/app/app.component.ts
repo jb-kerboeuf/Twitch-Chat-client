@@ -1,7 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { SocketService } from './socket.service';
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 interface UserData {
@@ -22,7 +21,7 @@ interface UserData {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule],
 })
 export class AppComponent implements OnDestroy {
   private messageSubscription: Subscription;
@@ -55,7 +54,7 @@ export class AppComponent implements OnDestroy {
               data.badge.search('Vérifié') > -1 ||
               data.badge.search('Abonn') > -1 ||
               data.badge.search('cheer') > -1
-              ),
+            ),
             xPosition: `${Math.round(Math.random() * 84)}vw`,
             mirror: Math.random() > 0.5,
             messages: [data.message]

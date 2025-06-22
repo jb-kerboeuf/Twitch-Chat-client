@@ -2,17 +2,21 @@
     margin: 0;
     padding: 0;
 }
+
 body {
     font-family: 'Fira Sans', sans-serif;
     background-color: transparent !important;
 }
+
 a {
     color: indigo;
 }
+
 button {
     background: none;
     border: none;
 }
+
 .mention-fragment {
     color: indigo;
 }
