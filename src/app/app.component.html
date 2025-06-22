@@ -1,0 +1,27 @@
+<div class="le-chat">
+
+  @for (user of chat; track user.name) {
+  <div class="user-container" style="left:{{ user.xPosition }}">
+    <div class="messages-container">
+
+      @for (msg of user.messages; track msg.text) {
+      <div class="user-message">
+        @if (msg.quote) {
+        <div class="message-quote" [innerHTML]=msg.quote></div>
+        }
+        <div class="message-text" [innerHTML]=msg.text></div>
+      </div>
+      }
+
+    </div>
+
+    <div class="user-body" style="background-color:{{ user.color }}"></div>
+
+    @if (user.badge) {
+    <div class="user-badge" [innerHTML]=user.badge></div>
+    }
+
+    <div class="user-name" style="color:{{ user.color }}">{{ user.name }}</div>
+  </div>
+  }
+</div>
