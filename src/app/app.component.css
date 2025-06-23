@@ -74,7 +74,8 @@
 
 .message-text {
     text-wrap: balance;
-    background-color: rgba(255, 255, 255, 0.85);
+    background-image: url('../../public/pastel_background.png');
+    background-size: 100% 150%;
     border-radius: 18px;
     padding: 6px 10px;
     color: black;

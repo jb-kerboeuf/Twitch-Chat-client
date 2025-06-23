@@ -53,6 +53,7 @@ export class AppComponent implements OnDestroy {
               data.badge.search('Modérateur') > -1 ||
               data.badge.search('Vérifié') > -1 ||
               data.badge.search('Abonn') > -1 ||
+              data.badge.search('Prime Gaming') > -1 ||
               data.badge.search('cheer') > -1
             ),
             xPosition: `${Math.round(Math.random() * 84)}vw`,
