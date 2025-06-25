@@ -45,22 +45,40 @@ io.on('connection', (socket) => {
         while (true) {
             // Evaluate the page
             let chat = await page.evaluate(() => {
-                let messageNodeList = document.querySelectorAll('.chat-line__message-container');
+                let messageNodeList = document.querySelectorAll('.chat-line__message-container, .user-notice-line');
                 let messageArray = [];
                 for (var i = 0; i < messageNodeList.length; i++) {
-                    const quoteNode = messageNodeList[i].querySelector('.eWyliK');
-                    const badgeNode = messageNodeList[i].querySelector('button[data-a-target="chat-badge"]');
-                    const userNode = messageNodeList[i].querySelector('span.chat-author__display-name');
-                    const textNode = messageNodeList[i].querySelector('span[data-a-target="chat-line-message-body"]');
-                    messageArray[i] = {
-                        user: userNode ? userNode.innerHTML : "???",
-                        color: userNode ? userNode.style.color : "white",
-                        badge: badgeNode ? badgeNode.innerHTML : null,
-                        message: {
-                            quote: quoteNode ? quoteNode.innerHTML.replace('Répond à ', '').replaceAll('@', '&#64;') : null,
-                            text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
-                        }
-                    };
+                    const noticeNode = messageNodeList[i].querySelector('.dJfBsr'); // Warning: prone to change
+                    if (noticeNode) {
+                        const userNode = messageNodeList[i].querySelector('span.chatter-name');
+                        messageArray[i] = {
+                            user: userNode ? userNode.textContent : "???",
+                            color: messageNodeList[i].style['border-left-color'],
+                            badge: null,
+                            message: {
+                                type: 'notice',
+                                quote: null,
+                                text: noticeNode.innerHTML.replaceAll('@', '&#64;')
+                            }
+                        };
+                    }
+                    else {
+                        const quoteNode = messageNodeList[i].querySelector('.eWyliK, .iWlGez'); // Warning: prone to change
+                        const badgeNode = messageNodeList[i].querySelector('button[data-a-target="chat-badge"]');
+                        const userNode = messageNodeList[i].querySelector('span.chat-author__display-name');
+                        const textNode = messageNodeList[i].querySelector('span[data-a-target="chat-line-message-body"]');
+                        const highlighted = messageNodeList[i].querySelector('span.chat-line__message-body--highlighted');
+                        messageArray[i] = {
+                            user: userNode ? userNode.textContent : "???",
+                            color: userNode ? userNode.style.color : "white",
+                            badge: badgeNode ? badgeNode.innerHTML : null,
+                            message: {
+                                type: highlighted ? 'highlight' : 'message',
+                                quote: quoteNode ? quoteNode.innerHTML.replace('Répond à ', '').replaceAll('@', '&#64;') : null,
+                                text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
+                            }
+                        };
+                    }
                 }
                 return messageArray;
             });
@@ -75,12 +93,13 @@ io.on('connection', (socket) => {
             if (newMessages.length != 0) {
                 for (var i = 0; i < newMessages.length; i++) {
                     extractedMessages.push(newMessages.at(i));
-                    // console.log('beep boop');
-                    io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
+                    if (i == 0 || (newMessages.at(i).user != newMessages.at(i - 1).user && newMessages.at(i).message.text != newMessages.at(i - 1).message.text)) {
+                        io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
+                    }
                 }
             }
             else {
-                await delay(500);
+                await delay(100);
             }
         }
     })();

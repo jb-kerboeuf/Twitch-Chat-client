@@ -5,12 +5,22 @@
     <div class="messages-container">
 
       @for (msg of user.messages; track msg.text) {
-      <div class="user-message " style="border-color:{{ user.color }}">
-        @if (msg.quote) {
-        <div class="message-quote" [innerHTML]=msg.quote></div>
-        }
-        <div class="message-text" [innerHTML]=msg.text></div>
-      </div>
+        <div class="user-message" style="border-color:{{ user.color }}">
+          @if (msg.quote) {
+            <div class="message-quote" [innerHTML]=msg.quote></div>
+          }
+          @if (msg.type == "message") {
+            <div class="message-text" [innerHTML]=msg.text></div>
+          }
+          @else {
+            @if (msg.type == "highlight") {
+              <div class="message-text message-highlighted" [innerHTML]=msg.text></div>
+            }
+            @else {
+              <div class="message-text message-notice" [innerHTML]=msg.text></div>
+            }
+          }
+        </div>
       }
 
     </div>

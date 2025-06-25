@@ -81,6 +81,15 @@
     color: black;
 }
 
+.message-highlighted, .message-notice {
+    font-family: 'Jersey 10', 'GG Sans', sans-serif;
+    font-weight: bold;
+    font-size: x-large;
+    font-variant-caps: small-caps;
+    color: indigo;
+    z-index: 1;
+}
+
 @keyframes bubble {
     0% {
         opacity: 0;

@@ -11,6 +11,7 @@ interface UserData {
   mirror: boolean;
   xPosition: string;
   messages: {
+    type: string;
     quote: string | null;
     text: string;
   }[]
@@ -35,6 +36,7 @@ export class AppComponent implements OnDestroy {
         const idx = this.users.indexOf(data.user);
         if (idx > -1) {
           this.chat[idx].messages.push(data.message);
+          this.chat[idx].color = data.color;
           // TODO pop up in front
           let overChating = this.chat[idx].messages.length - 5;
           for (var i = 0; i < overChating; i++) {
@@ -54,6 +56,7 @@ export class AppComponent implements OnDestroy {
               data.badge.search('Vérifié') > -1 ||
               data.badge.search('Abonn') > -1 ||
               data.badge.search('Prime Gaming') > -1 ||
+              data.badge.search('VIP') > -1 ||
               data.badge.search('cheer') > -1
             ),
             xPosition: `${Math.round(Math.random() * 84)}vw`,
@@ -63,6 +66,7 @@ export class AppComponent implements OnDestroy {
           let overPopulation = this.users.length - 50;
           for (var i = 0; i < overPopulation; i++) {
             document.querySelector('.user-container')?.remove();
+            this.chat.shift();
             this.users.shift();
           }
         }
