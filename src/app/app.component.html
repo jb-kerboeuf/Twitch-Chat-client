@@ -25,9 +25,9 @@
 
     </div>
 
-    <div class="user-body" [ngClass]="[user.sub ? 'subbed' : 'nosub', user.mirror ? 'face-left' : 'face-right']" style="background-color:{{ user.color }}"></div>
+    <div class="user-body" [ngClass]="[user.badge && user.badge.search('Diffuseur') > -1 ? 'creator' : '', user.sub ? 'subbed' : 'nosub', user.mirror ? 'face-left' : 'face-right']" style="background-color:{{ user.color }}"></div>
     @if (user.badge) {
-    <div class="user-badge" [innerHTML]=user.badge></div>
+      <div class="user-badge" [innerHTML]=user.badge></div>
     }
 
     <div class="user-name" style="color:{{ user.color }}">{{ user.name }}</div>
