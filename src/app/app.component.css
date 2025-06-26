@@ -38,6 +38,7 @@
         mask-image: none;
         height: 64px;
         width: 64px;
+        margin-bottom: 15px;
     }
 
     &.face-left {
@@ -50,24 +51,39 @@
     }
 }
 
-.user-container:has(.bot) {
-    z-index: 1;
-    & .user-badge {
-        display: none;
-    }
-}
-
 .user-badge {
     position: absolute;
-    bottom: 30px;
+    bottom: 24px;
     left: 50%;
     transform: translate(-50%, 0);
     mix-blend-mode: hard-light;
 }
 
+.user-container:has(.creator) {
+    z-index: 3;
+    & .user-badge {
+        bottom: 44px;
+    }
+}
+
+.user-container:has(.subbed) {
+    z-index: 1;
+    & .user-badge {
+        bottom: 31px;
+    }
+}
+
+.user-container:has(.bot) {
+    z-index: 2;
+    & .user-badge {
+        display: none;
+    }
+}
+
 .user-message {
     width: fit-content;
     max-width: 100%;
+    max-height: 400px;
     margin: 0 auto 10px auto;
     background-color: rgba(31, 0, 63, 0.35);
     border: 2px solid #333;
@@ -83,11 +99,6 @@
     background: none;
     box-shadow: none;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 1px 4px #000;
-    z-index: 1;
-}
-
-.user-message:has(> .message-highlighted) {
-    z-index: 1;
 }
 
 .user-name {

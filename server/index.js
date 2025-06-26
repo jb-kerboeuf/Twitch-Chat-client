@@ -97,11 +97,11 @@ io.on('connection', (socket) => {
                     if (i == 0 || (newMessages.at(i).user != newMessages.at(i - 1).user && newMessages.at(i).message.text != newMessages.at(i - 1).message.text)) {
                         if (newMessages.at(i).message.text != "") {
                             newMessages.at(i).message.id = uid;
-                            uid ++;
+                            uid++;
                             io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
                         }
                         else {
-                            console.log('Unrecognized message '+newMessages.at(i));
+                            console.log('Unrecognized message ' + JSON.stringify(newMessages.at(i)));
                         }
                     }
                 }
