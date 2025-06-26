@@ -56,7 +56,7 @@ export class AppComponent implements OnDestroy {
             data.badge.search('cheer') > -1
           )) {
             status = 'subbed'
-            if (data.user == 'WizeBot' || data.user == 'WZBot' || data.user == 'Nightbot') {
+            if (data.user == 'WizeBot' || data.user == 'WZBot' || data.user == 'Nightbot' || data.user == 'StreamElements' || data.user == 'Moobot') {
               status = 'bot'
             }
           }
@@ -73,7 +73,7 @@ export class AppComponent implements OnDestroy {
             mirror: Math.random() > 0.5,
             messages: [data.message]
           });
-          let overPopulation = this.users.length - 80;
+          let overPopulation = this.users.length - 50;
           for (var i = 0; i < overPopulation; i++) {
             document.querySelector('.user-container')?.remove();
             this.chat.shift();

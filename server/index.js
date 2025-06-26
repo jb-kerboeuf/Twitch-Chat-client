@@ -46,10 +46,11 @@ io.on('connection', (socket) => {
         while (true) {
             // Evaluate the page
             let chat = await page.evaluate(() => {
-                let messageNodeList = document.querySelectorAll('.chat-line__message-container, .user-notice-line');
+                let messageNodeList = document.querySelectorAll('.chat-line__message, .user-notice-line, .announcement-line');
                 let messageArray = [];
                 for (var i = 0; i < messageNodeList.length; i++) {
                     const noticeNode = messageNodeList[i].querySelector('.dJfBsr'); // Warning: prone to change
+                    const announceNode = messageNodeList[i].querySelector('.jmdYJS'); // Warning: prone to change
                     if (noticeNode) {
                         const userNode = messageNodeList[i].querySelector('span.chatter-name');
                         messageArray[i] = {
@@ -63,13 +64,28 @@ io.on('connection', (socket) => {
                             }
                         };
                     }
+                    else if(announceNode) {
+                        const badgeNode = messageNodeList[i].querySelector('button[data-a-target="chat-badge"]');
+                        const userNode = messageNodeList[i].querySelector('span.chat-author__display-name');
+                        const textNode = messageNodeList[i].querySelector('span[data-a-target="chat-line-message-body"]');
+                        messageArray[i] = {
+                            user: userNode ? userNode.textContent : "???",
+                            color: userNode ? userNode.style.color : "currentColor",
+                            badge: badgeNode ? badgeNode.innerHTML : null,
+                            message: {
+                                type: 'announce',
+                                quote: null,
+                                text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
+                            }
+                        };
+                    }
                     else {
                         const quoteNode = messageNodeList[i].querySelector('.eWyliK, .iWlGez'); // Warning: prone to change
                         const badgeNode = messageNodeList[i].querySelector('button[data-a-target="chat-badge"]');
                         const userNode = messageNodeList[i].querySelector('span.chat-author__display-name');
                         const textNode = messageNodeList[i].querySelector('span[data-a-target="chat-line-message-body"]');
                         const highlighted = messageNodeList[i].querySelector('span.chat-line__message-body--highlighted');
-                        const animated = messageNodeList[i].querySelector('animatedMessageContainer');
+                        const animated = messageNodeList[i].querySelector('.animatedMessageContainer');
                         messageArray[i] = {
                             user: userNode ? userNode.textContent : "???",
                             color: userNode ? userNode.style.color : "currentColor",
@@ -87,10 +103,9 @@ io.on('connection', (socket) => {
 
             // Find new messages 
             let newMessages = [];
-            let lastMessageIdx;
+            let lastMessageIdx = null;
             if (lastExtractedMessage) {
-                lastMessageIdx = -1;
-                for (var i = -1; i > -chat.length-1; i--) {
+                for (var i = 0; i >= -chat.length; i--) {
                     if (chat.at(i).message.text == lastExtractedMessage.message.text) {
                         lastMessageIdx = i;
                         break;
@@ -102,9 +117,9 @@ io.on('connection', (socket) => {
                 newMessages = chat;
             }
 
-            if (newMessages.length > 30) {
+            if (newMessages.length > 50) {
                 console.log("That's too much messages at once: " + newMessages.length);
-                newMessages = chat.slice(-30);
+                newMessages = chat.slice(-1);
             }
 
             // Save extracted messages

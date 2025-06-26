@@ -9,7 +9,7 @@
         @if (msg.quote) {
         <div class="message-quote" [innerHTML]=msg.quote></div>
         }
-        <div class="message-text" [class.message-highlighted]="msg.type == 'highlight'" [class.message-notice]="msg.type == 'notice'" [class.message-animated]="msg.type == 'animated'" [innerHTML]=msg.text></div>
+        <div class="message-text" [class.message-highlighted]="msg.type == 'highlight'" [class.message-announce]="msg.type == 'announce'" [class.message-notice]="msg.type == 'notice'" [class.message-animated]="msg.type == 'animated'" [innerHTML]=msg.text></div>
       </div>
       }
     </div>
