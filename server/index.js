@@ -69,12 +69,13 @@ io.on('connection', (socket) => {
                         const userNode = messageNodeList[i].querySelector('span.chat-author__display-name');
                         const textNode = messageNodeList[i].querySelector('span[data-a-target="chat-line-message-body"]');
                         const highlighted = messageNodeList[i].querySelector('span.chat-line__message-body--highlighted');
+                        const animated = messageNodeList[i].querySelector('animatedMessageContainer');
                         messageArray[i] = {
                             user: userNode ? userNode.textContent : "???",
                             color: userNode ? userNode.style.color : "currentColor",
                             badge: badgeNode ? badgeNode.innerHTML : null,
                             message: {
-                                type: highlighted ? 'highlight' : 'message',
+                                type: highlighted ? 'highlight' : animated ? 'animated' : 'message',
                                 quote: quoteNode ? quoteNode.innerHTML.replace('Répond à ', '').replaceAll('@', '&#64;') : null,
                                 text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
                             }

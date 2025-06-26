@@ -101,6 +101,11 @@
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 1px 4px #000;
 }
 
+.user-message:has(> .message-animated) {
+    border: none;
+    background: none;
+}
+
 .user-name {
     width: fit-content;
     margin: 0 auto 5px auto;
@@ -128,7 +133,9 @@
     color: black;
 }
 
-.message-highlighted, .message-notice {
+.message-highlighted,
+.message-notice,
+.message-animated {
     font-family: 'Jersey 10', 'GG Sans', sans-serif;
     font-weight: bold;
     font-size: x-large;
@@ -139,6 +146,10 @@
 .message-notice {
     background: none;
     font-size: xx-large;
+}
+
+.message-animated {
+    background: none;
 }
 
 @keyframes bubble {

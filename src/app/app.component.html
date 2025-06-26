@@ -2,35 +2,24 @@
 
   @for (user of chat; track user.name) {
   <div class="user-container" style="left:{{ user.xPosition }}">
+
     <div class="messages-container">
-
       @for (msg of user.messages; track msg.id) {
-        <div class="user-message" style="border-color:{{ user.color }}">
-          @if (msg.quote) {
-            <div class="message-quote" [innerHTML]=msg.quote></div>
-          }
-          @if (msg.type == "message") {
-            <div class="message-text" [innerHTML]=msg.text></div>
-          }
-          @else {
-            @if (msg.type == "highlight") {
-              <div class="message-text message-highlighted" [innerHTML]=msg.text></div>
-            }
-            @else {
-              <div class="message-text message-notice" [innerHTML]=msg.text></div>
-            }
-          }
-        </div>
+      <div class="user-message" style="border-color:{{ user.color }}">
+        @if (msg.quote) {
+        <div class="message-quote" [innerHTML]=msg.quote></div>
+        }
+        <div class="message-text" [class.message-highlighted]="msg.type == 'highlight'" [class.message-notice]="msg.type == 'notice'" [class.message-animated]="msg.type == 'animated'" [innerHTML]=msg.text></div>
+      </div>
       }
-
     </div>
 
     <div class="user-body" [ngClass]="[user.status, user.mirror ? 'face-left' : 'face-right']" style="background-color:{{ user.color }}"></div>
     @if (user.badge) {
-      <div class="user-badge" [innerHTML]=user.badge></div>
+    <div class="user-badge" [innerHTML]=user.badge></div>
     }
-
     <div class="user-name" style="color:{{ user.color }}">{{ user.name }}</div>
   </div>
   }
+
 </div>
