@@ -40,7 +40,7 @@ io.on('connection', (socket) => {
         await page.waitForSelector('.chat-line__message-container');
         console.log('Puppeteer activated')
 
-        let extractedMessages = [];
+        let lastExtractedMessage = null;
         let uid = 0;
 
         while (true) {
@@ -84,20 +84,36 @@ io.on('connection', (socket) => {
                 return messageArray;
             });
 
-            // Realign extractedMessages array with the new evaluated page 
-            while (extractedMessages.length > 0 && chat.at(0).message.text != extractedMessages.at(0).message.text) {
-                extractedMessages.shift();
+            // Find new messages 
+            let newMessages = [];
+            let lastMessageIdx;
+            if (lastExtractedMessage) {
+                lastMessageIdx = -1;
+                for (var i = -1; i > -chat.length; i--) {
+                    if (chat.at(i).message.text == lastExtractedMessage.message.text) {
+                        lastMessageIdx = i;
+                        break;
+                    }
+                }
+                newMessages = lastMessageIdx == -1 ? [] : chat.slice(i + 1);
             }
-            const newMessages = chat.slice(extractedMessages.length);
+            else {
+                newMessages = chat;
+            }
+
+            if (newMessages.length > 50) {
+                console.log("That's too much messages at once: " + newMessages.length);
+                newMessages = chat.slice(-50);
+            }
 
             // Save extracted messages
-            if (newMessages.length != 0) {
+            if (newMessages.length > 0) {
                 for (var i = 0; i < newMessages.length; i++) {
-                    extractedMessages.push(newMessages.at(i));
                     if (i == 0 || (newMessages.at(i).user != newMessages.at(i - 1).user && newMessages.at(i).message.text != newMessages.at(i - 1).message.text)) {
                         if (newMessages.at(i).message.text != "") {
                             newMessages.at(i).message.id = uid;
                             uid++;
+                            lastExtractedMessage = newMessages.at(i);
                             io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
                         }
                         else {
@@ -106,7 +122,6 @@ io.on('connection', (socket) => {
                     }
                 }
             }
-            await delay(100);
         }
     })();
 });
