@@ -90,7 +90,7 @@ io.on('connection', (socket) => {
             let lastMessageIdx;
             if (lastExtractedMessage) {
                 lastMessageIdx = -1;
-                for (var i = -1; i > -chat.length; i--) {
+                for (var i = -1; i > -chat.length-1; i--) {
                     if (chat.at(i).message.text == lastExtractedMessage.message.text) {
                         lastMessageIdx = i;
                         break;
@@ -102,9 +102,9 @@ io.on('connection', (socket) => {
                 newMessages = chat;
             }
 
-            if (newMessages.length > 50) {
+            if (newMessages.length > 30) {
                 console.log("That's too much messages at once: " + newMessages.length);
-                newMessages = chat.slice(-50);
+                newMessages = chat.slice(-30);
             }
 
             // Save extracted messages

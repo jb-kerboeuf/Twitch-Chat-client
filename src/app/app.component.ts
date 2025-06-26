@@ -73,7 +73,7 @@ export class AppComponent implements OnDestroy {
             mirror: Math.random() > 0.5,
             messages: [data.message]
           });
-          let overPopulation = this.users.length - 50;
+          let overPopulation = this.users.length - 80;
           for (var i = 0; i < overPopulation; i++) {
             document.querySelector('.user-container')?.remove();
             this.chat.shift();
