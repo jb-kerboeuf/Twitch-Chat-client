@@ -7,10 +7,11 @@ interface UserData {
   name: string;
   color: string;
   badge: string | null;
-  sub: boolean;
+  status: string;
   mirror: boolean;
   xPosition: string;
   messages: {
+    id: number;
     type: string;
     quote: string | null;
     text: string;
@@ -45,21 +46,30 @@ export class AppComponent implements OnDestroy {
           }
         }
         else {
+          let status = 'nosub';
+          if (data.badge && (
+            data.badge.search('Fondateur') > -1 ||
+            data.badge.search('Modérateur') > -1 ||
+            data.badge.search('Vérifié') > -1 ||
+            data.badge.search('Abonn') > -1 ||
+            data.badge.search('VIP') > -1 ||
+            data.badge.search('cheer') > -1
+          )) {
+            status = 'subbed'
+            if (data.user == 'WizeBot' || data.user == 'WZBot' || data.user == 'Nightbot') {
+              status = 'bot'
+            }
+          }
+          if (data.badge && data.badge.search('Diffuseur') > -1) {
+            status = 'creator'
+          }
           this.users.push(data.user);
           this.chat.push({
             name: data.user,
             color: data.color,
             badge: data.badge,
-            sub: data.badge && (
-              data.badge.search('Fondateur') > -1 ||
-              data.badge.search('Modérateur') > -1 ||
-              data.badge.search('Vérifié') > -1 ||
-              data.badge.search('Abonn') > -1 ||
-              data.badge.search('Prime Gaming') > -1 ||
-              data.badge.search('VIP') > -1 ||
-              data.badge.search('cheer') > -1
-            ),
-            xPosition: `${Math.round(Math.random() * 84)}vw`,
+            status: status,
+            xPosition: `${Math.round(Math.random() * 80)}vw`,
             mirror: Math.random() > 0.5,
             messages: [data.message]
           });

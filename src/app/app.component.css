@@ -3,7 +3,7 @@
 }
 
 .user-container {
-    max-width: 300px;
+    width: 300px;
     text-align: center;
     position: absolute;
     bottom: 0;
@@ -16,20 +16,44 @@
     background-size: contain;
     mask-size: contain;
     background-blend-mode: hard-light;
+
+    &.creator {
+        background: url('../../public/buddy_idle.gif');
+        mask-image: url('../../public/buddy_idle.gif');
+    }
+
     &.subbed {
         background: url('../../public/buddy_idle.gif');
         mask-image: url('../../public/buddy_idle.gif');
     }
+
     &.nosub {
         background: url('../../public/buddy_sit.gif');
         mask-image: url('../../public/buddy_sit.gif');
     }
+
+    &.bot {
+        background: url('../../public/robot.gif');
+        background-color: transparent !important;
+        mask-image: none;
+        height: 64px;
+        width: 64px;
+    }
+
     &.face-left {
         transform: scaleX(-1);
     }
+
     &.creator {
         transform: scale(1.5);
         margin-bottom: 14px;
+    }
+}
+
+.user-container:has(.bot) {
+    z-index: 1;
+    & .user-badge {
+        display: none;
     }
 }
 
@@ -52,6 +76,18 @@
     box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 0.5);
     opacity: 0;
     animation: 'bubble' 20s ease-in-out 1;
+}
+
+.user-message:has(> .message-notice) {
+    border: none;
+    background: none;
+    box-shadow: none;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 1px 4px #000;
+    z-index: 1;
+}
+
+.user-message:has(> .message-highlighted) {
+    z-index: 1;
 }
 
 .user-name {
@@ -87,7 +123,11 @@
     font-size: x-large;
     font-variant-caps: small-caps;
     color: indigo;
-    z-index: 1;
+}
+
+.message-notice {
+    background: none;
+    font-size: xx-large;
 }
 
 @keyframes bubble {
@@ -95,13 +135,16 @@
         opacity: 0;
         transform: scale(0, 0);
     }
+
     1% {
         opacity: 1;
         transform: scale(1, 1);
     }
+
     50% {
         opacity: 1;
     }
+
     100% {
         opacity: 0;
         transform: translateY(-500px);

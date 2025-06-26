@@ -4,7 +4,7 @@
   <div class="user-container" style="left:{{ user.xPosition }}">
     <div class="messages-container">
 
-      @for (msg of user.messages; track msg.text) {
+      @for (msg of user.messages; track msg.id) {
         <div class="user-message" style="border-color:{{ user.color }}">
           @if (msg.quote) {
             <div class="message-quote" [innerHTML]=msg.quote></div>
@@ -25,7 +25,7 @@
 
     </div>
 
-    <div class="user-body" [ngClass]="[user.badge && user.badge.search('Diffuseur') > -1 ? 'creator' : '', user.sub ? 'subbed' : 'nosub', user.mirror ? 'face-left' : 'face-right']" style="background-color:{{ user.color }}"></div>
+    <div class="user-body" [ngClass]="[user.status, user.mirror ? 'face-left' : 'face-right']" style="background-color:{{ user.color }}"></div>
     @if (user.badge) {
       <div class="user-badge" [innerHTML]=user.badge></div>
     }

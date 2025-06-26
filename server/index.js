@@ -41,6 +41,7 @@ io.on('connection', (socket) => {
         console.log('Puppeteer activated')
 
         let extractedMessages = [];
+        let uid = 0;
 
         while (true) {
             // Evaluate the page
@@ -53,7 +54,7 @@ io.on('connection', (socket) => {
                         const userNode = messageNodeList[i].querySelector('span.chatter-name');
                         messageArray[i] = {
                             user: userNode ? userNode.textContent : "???",
-                            color: messageNodeList[i].style['border-left-color'],
+                            color: messageNodeList[i].style ? messageNodeList[i].style['border-left-color'] : "currentColor",
                             badge: null,
                             message: {
                                 type: 'notice',
@@ -70,7 +71,7 @@ io.on('connection', (socket) => {
                         const highlighted = messageNodeList[i].querySelector('span.chat-line__message-body--highlighted');
                         messageArray[i] = {
                             user: userNode ? userNode.textContent : "???",
-                            color: userNode ? userNode.style.color : "white",
+                            color: userNode ? userNode.style.color : "currentColor",
                             badge: badgeNode ? badgeNode.innerHTML : null,
                             message: {
                                 type: highlighted ? 'highlight' : 'message',
@@ -94,13 +95,18 @@ io.on('connection', (socket) => {
                 for (var i = 0; i < newMessages.length; i++) {
                     extractedMessages.push(newMessages.at(i));
                     if (i == 0 || (newMessages.at(i).user != newMessages.at(i - 1).user && newMessages.at(i).message.text != newMessages.at(i - 1).message.text)) {
-                        io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
+                        if (newMessages.at(i).message.text != "") {
+                            newMessages.at(i).message.id = uid;
+                            uid ++;
+                            io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
+                        }
+                        else {
+                            console.log('Unrecognized message '+newMessages.at(i));
+                        }
                     }
                 }
             }
-            else {
-                await delay(100);
-            }
+            await delay(100);
         }
     })();
 });
