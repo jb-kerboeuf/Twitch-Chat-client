@@ -1,16 +1,22 @@
+:root {
+    --default-font: 'GG Sans semibold', 'Futura', sans-serif;
+    --accent-font: 'Jersey 10', 'Impact', sans-serif;
+    --accent-color: indigo;
+}
+
 * {
     margin: 0;
     padding: 0;
 }
 
 body {
-    background-color: transparent !important;
-    font-family: 'GG Sans semibold', sans-serif;
-    color: #333;
+    background-color: transparent;
+    font-family: var(--default-font);
+    color: #222;
 }
 
 a {
-    color: indigo;
+    color: var(--accent-color);
     text-wrap: nowrap;
 }
 
@@ -20,5 +26,5 @@ button {
 }
 
 .mention-fragment {
-    color: indigo;
+    color: var(--accent-color);
 }

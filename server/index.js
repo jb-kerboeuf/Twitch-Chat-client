@@ -111,14 +111,14 @@ io.on('connection', (socket) => {
                         break;
                     }
                 }
-                newMessages = lastMessageIdx == -1 ? [] : chat.slice(i + 1);
+                newMessages = lastMessageIdx == -1 ? [] : chat.slice(lastMessageIdx + 1);
             }
             else {
                 newMessages = chat;
             }
 
             if (newMessages.length > 50) {
-                console.log("That's too much messages at once: " + newMessages.length);
+                console.error("Error: lost track of messages");
                 newMessages = chat.slice(-1);
             }
 
@@ -133,7 +133,7 @@ io.on('connection', (socket) => {
                             io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
                         }
                         else {
-                            console.log('Unrecognized message ' + JSON.stringify(newMessages.at(i)));
+                            console.error('Unrecognized message:\n' + JSON.stringify(newMessages.at(i)) + '\n');
                         }
                     }
                 }

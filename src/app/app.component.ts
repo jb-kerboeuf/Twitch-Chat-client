@@ -56,7 +56,7 @@ export class AppComponent implements OnDestroy {
             data.badge.search('cheer') > -1
           )) {
             status = 'subbed'
-            if (data.user == 'WizeBot' || data.user == 'WZBot' || data.user == 'Nightbot' || data.user == 'StreamElements' || data.user == 'Moobot') {
+            if (data.user == 'WizeBot' || data.user == 'WZBot' || data.user == 'Nightbot' || data.user == 'StreamElements' || data.user == 'Moobot' || data.user == 'Fossabot') {
               status = 'bot'
             }
           }
