@@ -29,11 +29,13 @@ export class AppComponent implements OnDestroy {
   private messageSubscription: Subscription;
   chat: UserData[] = [];
   users: string[] = [];
+  train: boolean = false;
 
   constructor(private socketService: SocketService) {
     this.messageSubscription = this.socketService
       .on('message')
       .subscribe((data) => {
+        this.train = data.train;
         const idx = this.users.indexOf(data.user);
         if (idx > -1) {
           this.chat[idx].messages.push(data.message);

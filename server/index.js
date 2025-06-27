@@ -47,6 +47,7 @@ io.on('connection', (socket) => {
             // Evaluate the page
             let chat = await page.evaluate(() => {
                 let messageNodeList = document.querySelectorAll('.chat-line__message, .user-notice-line, .announcement-line');
+                let hypeTrainNode = document.querySelector('.hype-train__banner');
                 let messageArray = [];
                 for (var i = 0; i < messageNodeList.length; i++) {
                     const noticeNode = messageNodeList[i].querySelector('.dJfBsr'); // Warning: prone to change
@@ -54,6 +55,7 @@ io.on('connection', (socket) => {
                     if (noticeNode) {
                         const userNode = messageNodeList[i].querySelector('span.chatter-name');
                         messageArray[i] = {
+                            train: hypeTrainNode ? true : false,
                             user: userNode ? userNode.textContent : "???",
                             color: messageNodeList[i].style ? messageNodeList[i].style['border-left-color'] : "currentColor",
                             badge: null,
@@ -69,6 +71,7 @@ io.on('connection', (socket) => {
                         const userNode = messageNodeList[i].querySelector('span.chat-author__display-name');
                         const textNode = messageNodeList[i].querySelector('span[data-a-target="chat-line-message-body"]');
                         messageArray[i] = {
+                            train: hypeTrainNode ? true : false,
                             user: userNode ? userNode.textContent : "???",
                             color: userNode ? userNode.style.color : "currentColor",
                             badge: badgeNode ? badgeNode.innerHTML : null,
@@ -87,6 +90,7 @@ io.on('connection', (socket) => {
                         const highlighted = messageNodeList[i].querySelector('span.chat-line__message-body--highlighted');
                         const animated = messageNodeList[i].querySelector('.animatedMessageContainer');
                         messageArray[i] = {
+                            train: hypeTrainNode ? true : false,
                             user: userNode ? userNode.textContent : "???",
                             color: userNode ? userNode.style.color : "currentColor",
                             badge: badgeNode ? badgeNode.innerHTML : null,

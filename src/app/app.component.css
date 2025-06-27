@@ -164,23 +164,42 @@
     background: none;
 }
 
+.hype-train-container {
+    position: absolute;
+    bottom: 10px;
+    z-index: 5;
+    animation: 'train' 1s ease-out 1 forwards;
+}
+.hype-train {
+    position: absolute;
+    left: 6vw;
+}
+.train-tag {
+    mix-blend-mode: color-dodge;
+}
+
 @keyframes bubble {
     0% {
         opacity: 0;
         transform: scale(0, 0);
     }
-
     1% {
         opacity: 1;
         transform: scale(1, 1);
     }
-
     50% {
         opacity: 1;
     }
-
     100% {
         opacity: 0;
         transform: translateY(-500px);
+    }
+}
+@keyframes train {
+    0% {
+        left: -100vw;
+    }
+    100% {
+        left: 0;
     }
 }
