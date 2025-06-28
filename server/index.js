@@ -46,60 +46,57 @@ io.on('connection', (socket) => {
         while (true) {
             // Evaluate the page
             let chat = await page.evaluate(() => {
-                let messageNodeList = document.querySelectorAll('.chat-line__message, .user-notice-line, .announcement-line');
-                let hypeTrainNode = document.querySelector('.hype-train__banner');
+                const messageNodeList = document.querySelectorAll('.chat-line__message, .user-notice-line, .announcement-line');
+                const hypeTrainNode = document.querySelector('.hype-train__banner');
+
                 let messageArray = [];
                 for (var i = 0; i < messageNodeList.length; i++) {
-                    const noticeNode = messageNodeList[i].querySelector('.dJfBsr'); // Warning: prone to change
-                    const announceNode = messageNodeList[i].querySelector('.jmdYJS'); // Warning: prone to change
+                    const userNode = messageNodeList[i].querySelector('span.chat-author__display-name, span.chatter-name');
+                    const noticeNode = messageNodeList[i].querySelector('.dJfBsr, .hDlHnO'); // Warning: prone to change
                     if (noticeNode) {
-                        const userNode = messageNodeList[i].querySelector('span.chatter-name');
                         messageArray[i] = {
                             train: hypeTrainNode ? true : false,
                             user: userNode ? userNode.textContent : "???",
-                            color: messageNodeList[i].style ? messageNodeList[i].style['border-left-color'] : "currentColor",
+                            color: "var(--accent-color)",
                             badge: null,
                             message: {
                                 type: 'notice',
-                                quote: null,
                                 text: noticeNode.innerHTML.replaceAll('@', '&#64;')
                             }
                         };
                     }
-                    else if(announceNode) {
-                        const badgeNode = messageNodeList[i].querySelector('button[data-a-target="chat-badge"]');
-                        const userNode = messageNodeList[i].querySelector('span.chat-author__display-name');
-                        const textNode = messageNodeList[i].querySelector('span[data-a-target="chat-line-message-body"]');
-                        messageArray[i] = {
-                            train: hypeTrainNode ? true : false,
-                            user: userNode ? userNode.textContent : "???",
-                            color: userNode ? userNode.style.color : "currentColor",
-                            badge: badgeNode ? badgeNode.innerHTML : null,
-                            message: {
-                                type: 'announce',
-                                quote: null,
-                                text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
-                            }
-                        };
-                    }
                     else {
-                        const quoteNode = messageNodeList[i].querySelector('.eWyliK, .iWlGez'); // Warning: prone to change
                         const badgeNode = messageNodeList[i].querySelector('button[data-a-target="chat-badge"]');
-                        const userNode = messageNodeList[i].querySelector('span.chat-author__display-name');
                         const textNode = messageNodeList[i].querySelector('span[data-a-target="chat-line-message-body"]');
-                        const highlighted = messageNodeList[i].querySelector('span.chat-line__message-body--highlighted');
-                        const animated = messageNodeList[i].querySelector('.animatedMessageContainer');
-                        messageArray[i] = {
-                            train: hypeTrainNode ? true : false,
-                            user: userNode ? userNode.textContent : "???",
-                            color: userNode ? userNode.style.color : "currentColor",
-                            badge: badgeNode ? badgeNode.innerHTML : null,
-                            message: {
-                                type: highlighted ? 'highlight' : animated ? 'animated' : 'message',
-                                quote: quoteNode ? quoteNode.innerHTML.replace('Répond à ', '').replaceAll('@', '&#64;') : null,
-                                text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
-                            }
-                        };
+                        const announceNode = messageNodeList[i].querySelector('.jmdYJS'); // Warning: prone to change
+                        if (announceNode) {
+                            messageArray[i] = {
+                                train: hypeTrainNode ? true : false,
+                                user: userNode ? userNode.textContent : "???",
+                                color: "var(--accent-color)",
+                                badge: badgeNode ? badgeNode.innerHTML : null,
+                                message: {
+                                    type: 'announce',
+                                    text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
+                                }
+                            };
+                        }
+                        else {
+                            const highlighted = messageNodeList[i].querySelector('span.chat-line__message-body--highlighted');
+                            const animated = messageNodeList[i].querySelector('.animatedMessageContainer');
+                            const quoteNode = messageNodeList[i].querySelector('.eWyliK, .iWlGez'); // Warning: prone to change
+                            messageArray[i] = {
+                                train: hypeTrainNode ? true : false,
+                                user: userNode ? userNode.textContent : "???",
+                                color: userNode ? userNode.style.color : "currentColor",
+                                badge: badgeNode ? badgeNode.innerHTML : null,
+                                message: {
+                                    type: highlighted ? 'highlight' : animated ? 'animated' : 'message',
+                                    quote: quoteNode ? quoteNode.innerHTML.replace('Répond à ', '').replaceAll('@', '&#64;') : null,
+                                    text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
+                                }
+                            };
+                        }
                     }
                 }
                 return messageArray;
@@ -110,7 +107,7 @@ io.on('connection', (socket) => {
             let lastMessageIdx = null;
             if (lastExtractedMessage) {
                 for (var i = 0; i >= -chat.length; i--) {
-                    if (chat.at(i).message.text == lastExtractedMessage.message.text) {
+                    if (chat.at(i).user == lastExtractedMessage.user && chat.at(i).message.text == lastExtractedMessage.message.text) {
                         lastMessageIdx = i;
                         break;
                     }
@@ -126,20 +123,16 @@ io.on('connection', (socket) => {
                 newMessages = chat.slice(-1);
             }
 
-            // Save extracted messages
-            if (newMessages.length > 0) {
-                for (var i = 0; i < newMessages.length; i++) {
-                    if (i == 0 || (newMessages.at(i).user != newMessages.at(i - 1).user && newMessages.at(i).message.text != newMessages.at(i - 1).message.text)) {
-                        if (newMessages.at(i).message.text != "") {
-                            newMessages.at(i).message.id = uid;
-                            uid++;
-                            lastExtractedMessage = newMessages.at(i);
-                            io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
-                        }
-                        else {
-                            console.error('Unrecognized message:\n' + JSON.stringify(newMessages.at(i)) + '\n');
-                        }
-                    }
+            // Emit extracted messages
+            for (var i = 0; i < newMessages.length; i++) {
+                if (newMessages[i].message.text != "") {
+                    newMessages[i].message.id = uid;
+                    uid++;
+                    lastExtractedMessage = newMessages[i];
+                    io.emit('message', newMessages[i]); // Broadcasting the message to all clients
+                }
+                else {
+                    console.error('Unrecognized message:\n' + JSON.stringify(newMessages[i]) + '\n');
                 }
             }
         }
