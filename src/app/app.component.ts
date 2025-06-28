@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 interface UserData {
   name: string;
   color: string;
-  badge: string | null;
+  badge: string;
   status: string;
   mirror: boolean;
   xPosition: string;
@@ -40,6 +40,7 @@ export class AppComponent implements OnDestroy {
         if (idx > -1) {
           this.chat[idx].messages.push(data.message);
           this.chat[idx].color = data.color;
+          this.chat[idx].badge = data.badges[0];
           // TODO pop up in front
           let overChating = this.chat[idx].messages.length - 5;
           for (var i = 0; i < overChating; i++) {
@@ -48,28 +49,27 @@ export class AppComponent implements OnDestroy {
           }
         }
         else {
+          const badgesHtml = data.badges.join("");
           let status = 'nosub';
-          if (data.badge && (
-            data.badge.search('Fondateur') > -1 ||
-            data.badge.search('Modérateur') > -1 ||
-            data.badge.search('Vérifié') > -1 ||
-            data.badge.search('Abonn') > -1 ||
-            data.badge.search('VIP') > -1 ||
-            data.badge.search('cheer') > -1
-          )) {
+          if (badgesHtml.search('Fondateur') > -1 ||
+              badgesHtml.search('Modérateur') > -1 ||
+              badgesHtml.search('Vérifié') > -1 ||
+              badgesHtml.search('Abonn') > -1 ||
+              badgesHtml.search('VIP') > -1 ||
+              badgesHtml.search('cheer') > -1) {
             status = 'subbed'
             if (data.user == 'WizeBot' || data.user == 'WZBot' || data.user == 'Nightbot' || data.user == 'StreamElements' || data.user == 'Moobot' || data.user == 'Fossabot') {
               status = 'bot'
             }
           }
-          if (data.badge && data.badge.search('Diffuseur') > -1) {
+          if (badgesHtml.search('Diffuseur') > -1) {
             status = 'creator'
           }
           this.users.push(data.user);
           this.chat.push({
             name: data.user,
             color: data.color,
-            badge: data.badge,
+            badge: data.badges[0],
             status: status,
             xPosition: `${Math.round(Math.random() * 80)}vw`,
             mirror: Math.random() > 0.5,
