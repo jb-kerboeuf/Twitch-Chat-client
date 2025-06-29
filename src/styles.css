@@ -28,3 +28,9 @@ button {
 .mention-fragment {
     color: var(--accent-color);
 }
+
+img[alt^="cheer"],
+img[alt="Écoute uniquement"],
+img[alt="SUBtember 2024"] {
+    border-radius: 7px;
+}

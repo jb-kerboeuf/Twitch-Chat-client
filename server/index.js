@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
                         messageArray.push({
                             train: !!hypeTrainNode,
                             user: userNode ? userNode.textContent : "???",
-                            color: "currentColor",
+                            color: "var(--accent-color)",
                             badges: [],
                             message: {
                                 type: 'notice',
@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
                             messageArray.push({
                                 train: !!hypeTrainNode,
                                 user: userNode ? userNode.textContent : "???",
-                                color: "currentColor",
+                                color: userNode ? userNode.style.color : "var(--accent-color)",
                                 badges: badges,
                                 message: {
                                     type: 'announce',
@@ -92,7 +92,7 @@ io.on('connection', (socket) => {
                             messageArray.push({
                                 train: !!hypeTrainNode,
                                 user: userNode ? userNode.textContent : "???",
-                                color: userNode ? userNode.style.color : "currentColor",
+                                color: userNode ? userNode.style.color : "var(--accent-color)",
                                 badges: badges,
                                 message: {
                                     type: highlighted ? 'highlight' : animated ? 'animated' : 'message',

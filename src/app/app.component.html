@@ -22,8 +22,7 @@
   </div>
   }
 
-  @if (train) {
-  <div class="hype-train-container">
+  <div [ngClass]="['hype-train-container', train ? 'arrive' : 'depart']">
     <div class="hype-train">
       <img src="/assets/train_last.gif">
       <img src="/assets/train_door.gif">
@@ -45,6 +44,5 @@
     </div>
     <div class="train-tag"><img src="/assets/train_tag.png"></div>
   </div>
-  }
 
 </div>

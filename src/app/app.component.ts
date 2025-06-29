@@ -40,7 +40,7 @@ export class AppComponent implements OnDestroy {
         if (idx > -1) {
           this.chat[idx].messages.push(data.message);
           this.chat[idx].color = data.color;
-          this.chat[idx].badge = data.badges[0];
+          this.chat[idx].badge = data.badges.length > 1 && data.badges[0].search('Abonné') > -1 ? data.badges[1] : data.badges[0];
           // TODO pop up in front
           let overChating = this.chat[idx].messages.length - 5;
           for (var i = 0; i < overChating; i++) {
@@ -69,7 +69,7 @@ export class AppComponent implements OnDestroy {
           this.chat.push({
             name: data.user,
             color: data.color,
-            badge: data.badges[0],
+            badge: data.badges.length > 1 && data.badges[0].search('Abonné') > -1 ? data.badges[1] : data.badges[0],
             status: status,
             xPosition: `${Math.round(Math.random() * 80)}vw`,
             mirror: Math.random() > 0.5,
