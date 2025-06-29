@@ -10,8 +10,8 @@
 }
 
 .user-body {
-    height: 58px;
-    width: 38px;
+    height: 56px;
+    width: 56px;
     margin: 0 auto;
     background-size: contain;
     mask-size: contain;
@@ -36,9 +36,7 @@
         background: url('../assets/robot.gif');
         background-color: transparent !important;
         mask-image: none;
-        height: 64px;
-        width: 64px;
-        margin-bottom: 15px;
+        margin-bottom: 14px;
     }
 
     &.face-left {
@@ -51,18 +49,11 @@
     }
 }
 
-.user-badge {
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    mix-blend-mode: hard-light;
-}
-
 .user-container:has(.creator) {
     z-index: 3;
     & .user-badge {
         bottom: 44px;
+        mix-blend-mode: luminosity;
     }
 }
 
@@ -78,6 +69,79 @@
     & .user-badge {
         display: none;
     }
+}
+
+.user-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    mix-blend-mode: hard-light;
+}
+
+.user-container:has(img[alt="Modérateur"]) {
+    z-index: 2;
+
+    & .face-left {
+        transform: scaleX(1) !important;
+    }
+
+    & .user-badge {
+        content: url('../assets/sword.gif');
+        bottom: 25px;
+        mix-blend-mode: normal;
+    }
+}
+
+.user-container:has(img[alt="VIP"]) {
+    z-index: 2;
+
+    & .face-left {
+        transform: scaleX(1) !important;
+    }
+
+    & .user-badge {
+        content: url('../assets/vip.gif');
+        bottom: 39px;
+        mix-blend-mode: normal;
+    }
+}
+
+.user-container:has(img[alt="GlitchCon 2020"]) {
+
+    & .user-body {
+        background: none !important;
+    }
+
+    & .user-badge {
+        content: url('../assets/dino.gif');
+        mix-blend-mode: normal;
+    }
+}
+
+.user-badge:has(img[alt="Prime Gaming"]) {
+    content: url('../assets/prime.gif');
+    bottom: 65px;
+    mix-blend-mode: normal;
+}
+
+.user-badge:has(img[alt="Vérifié"]) {
+    mix-blend-mode: luminosity;
+}
+
+.user-badge:has(img[alt="Turbo"]) {
+    mix-blend-mode: luminosity;
+}
+
+.user-badge:has(img[alt="Écoute uniquement"]),
+.user-badge:has(img[alt="SUBtember 2024"]) {
+    mix-blend-mode: normal;
+    bottom: 45px;
+}
+
+.user-badge:has(img[alt="Regarde sans le son"]) {
+    mix-blend-mode: lighten;
+    bottom: 27px;
 }
 
 .user-message {
@@ -120,6 +184,7 @@
 
 .user-name {
     width: fit-content;
+    line-height: 20px;
     margin: 0 auto 5px auto;
     border-radius: 30px;
     font-family: var(--accent-font);
@@ -170,10 +235,12 @@
     z-index: 5;
     animation: 'train' 1s ease-out 1 forwards;
 }
+
 .hype-train {
     position: absolute;
     left: 6vw;
 }
+
 .train-tag {
     mix-blend-mode: color-dodge;
 }
@@ -198,6 +265,7 @@
         display: none;
     }
 }
+
 @keyframes train {
     0% {
         left: -100vw;
