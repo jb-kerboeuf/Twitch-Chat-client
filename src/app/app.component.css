@@ -39,14 +39,32 @@
         margin-bottom: 14px;
     }
 
-    &.face-left {
-        transform: scaleX(-1);
-    }
-
     &.creator {
         transform: scale(1.5);
         margin-bottom: 14px;
     }
+}
+
+.face-left .user-body {
+    transform: scaleX(-1);
+}
+
+.face-left .user-badge:has(img[alt="Modérateur"]),
+.face-left .user-badge:has(img[alt^="Fondateur"]),
+.face-left .user-badge:has(img[alt="Actuel conducteur de la Hype"]),
+.face-left .user-badge:has(img[alt="Précédent conducteur de la Hype"]),
+.face-left .user-badge:has(img[alt="GlitchCon 2020"]),
+.face-left .user-badge:has(img[alt="Célébration du 15e anniversaire de Minecraft"]),
+.face-left .user-badge:has(img[alt="Borderlands 4 Badge - Vault Symbol"]),
+.face-left .user-badge:has(img[alt="SUBtember 2024"]),
+.face-left .user-badge:has(img[alt="Speedons 5 Badge"]),
+.face-left .user-badge:has(img[alt="League of Legends Mid Season Invitational 2025"]),
+.face-left .user-badge:has(img[alt="Casque du Loup enragé"]),
+.face-left .user-badge:has(img[alt="Badge de clip Elden Ring Nightreign de Rôdeur"]),
+.face-left .user-badge:has(img[alt="Badge Elden Ring SuperFan d'Anachorète"]),
+.face-left .user-badge:has(img[alt="La Velada del Año IV"]),
+.face-left .user-badge:has(img[alt="LEGENDUS"]) {
+    transform: scaleX(-1) translateX(50%);
 }
 
 .user-badge {
@@ -84,10 +102,6 @@
 .user-container:has(img[alt="Modérateur"]) {
     z-index: 2;
 
-    & .face-left {
-        transform: scaleX(1) !important;
-    }
-
     & .user-badge {
         content: url('../assets/sword.gif');
         bottom: 25px;
@@ -96,10 +110,6 @@
 
 .user-container:has(img[alt="VIP"]) {
     z-index: 2;
-
-    & .face-left {
-        transform: scaleX(1) !important;
-    }
 
     & .user-badge {
         content: url('../assets/vip.gif');
@@ -111,60 +121,9 @@
     z-index: 2;
     left: 80vw !important;
 
-    & .face-left {
-        transform: scaleX(1) !important;
-    }
-
     & .user-badge {
         content: url('../assets/gilet-jaune.gif');
         padding-bottom: 2px;
-    }
-}
-
-.user-container:has(img[alt="Précédent conducteur de la Hype"]) {
-    & .face-left {
-        transform: scaleX(1) !important;
-    }
-
-    & .user-badge {
-        content: url('../assets/gilet-cyan.gif');
-        padding-bottom: 2px;
-    }
-}
-
-.user-container:has(img[alt="Speedons 5 Badge"]) {
-    & .face-left {
-        transform: scaleX(1) !important;
-    }
-
-    & .user-badge {
-        content: url('../assets/speedons.gif');
-        padding-bottom: 31px;
-        padding-right: 33px;
-    }
-}
-
-.user-container:has(img[alt="Casque du Loup enragé"]) {
-    & .face-left {
-        transform: scaleX(1) !important;
-    }
-
-    & .user-badge {
-        content: url('../assets/eldenring-1.gif');
-        padding-bottom: 25px;
-        padding-right: 1px;
-    }
-}
-
-.user-container:has(img[alt="La Velada del Año IV"])
-.user-container:has(img[alt="LEGENDUS"]) {
-    & .face-left {
-        transform: scaleX(1) !important;
-    }
-
-    & .user-badge {
-        content: url('../assets/boxing.gif');
-        padding-bottom: 9px;
     }
 }
 
@@ -199,6 +158,23 @@
         content: url('../assets/borderlands.gif');
         bottom: 24px;
     }
+}
+
+.user-badge:has(img[alt="Précédent conducteur de la Hype"]) {
+    content: url('../assets/gilet-cyan.gif');
+    padding-bottom: 2px;
+}
+
+.user-badge:has(img[alt="Speedons 5 Badge"]) {
+    content: url('../assets/speedons.gif');
+    padding-bottom: 31px;
+    padding-right: 33px;
+}
+
+.user-badge:has(img[alt="La Velada del Año IV"])
+.user-badge:has(img[alt="LEGENDUS"]) {
+    content: url('../assets/boxing.gif');
+    padding-bottom: 9px;
 }
 
 .user-badge:has(img[alt="Prime Gaming"]) {
@@ -239,6 +215,12 @@
     padding-bottom: 3px;
 }
 
+.user-badge:has(img[alt="Casque du Loup enragé"]) {
+    content: url('../assets/eldenring-1.gif');
+    padding-bottom: 25px;
+    padding-right: 3px;
+}
+
 .user-badge:has(img[alt="Badge de clip Elden Ring Nightreign de Rôdeur"]) {
     content: url('../assets/eldenring-2.gif');
     padding-bottom: 13px;
@@ -247,6 +229,17 @@
 .user-badge:has(img[alt="Badge Elden Ring SuperFan d'Anachorète"]) {
     content: url('../assets/eldenring-3.gif');
     padding-bottom: 37px;
+    padding-right: 3px;
+}
+
+.user-badge:has(img[alt="Première de la saison 2 d'Arcane"]) {
+    content: url('../assets/arcane.gif');
+    padding-bottom: 7px;
+}
+
+.user-badge:has(img[alt="League of Legends Mid Season Invitational 2025"]) {
+    content: url('../assets/lol.gif');
+    padding-bottom: 19px;
 }
 
 .user-badge:has(img[alt="Badge Avoir la banane"]) {

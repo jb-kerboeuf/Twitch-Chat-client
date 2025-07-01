@@ -1,7 +1,7 @@
 <div class="le-chat">
 
   @for (user of chat; track user.name) {
-  <div class="user-container" style="left:{{ user.xPosition }}">
+  <div class="user-container" [class.face-left]="user.mirror" style="left:{{ user.xPosition }}">
 
     <div class="messages-container">
       @for (msg of user.messages; track msg.id) {
@@ -14,7 +14,7 @@
       }
     </div>
 
-    <div class="user-body" [ngClass]="[user.status, user.mirror ? 'face-left' : 'face-right']" style="background-color:{{ user.color }}"></div>
+    <div class="user-body" [ngClass]="[user.status]" style="background-color:{{ user.color }}"></div>
     @if (user.badge) {
     <div class="user-badge" [innerHTML]=user.badge></div>
     }
