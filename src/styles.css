@@ -1,7 +1,7 @@
 :root {
     --default-font: 'GG Sans semibold', 'Futura', sans-serif;
     --accent-font: 'Jersey 10', 'Impact', sans-serif;
-    --accent-color: indigo;
+    --accent-color: rebeccapurple;
 }
 
 * {
@@ -27,10 +27,6 @@ button {
 
 .mention-fragment {
     color: var(--accent-color);
-}
-
-img[alt^="cheer"] {
-    border-radius: 10px;
 }
 
 img[alt="Écoute uniquement"],

@@ -18,8 +18,10 @@
     background-blend-mode: hard-light;
 
     &.creator {
-        background: url('../assets/buddy_idle.gif');
-        mask-image: url('../assets/buddy_idle.gif');
+        height: 96px;
+        width: 96px;
+        background: url('../assets/buddy_jump.gif');
+        mask-image: url('../assets/buddy_jump.gif');
     }
 
     &.subbed {
@@ -33,14 +35,9 @@
     }
 
     &.bot {
-        background: url('../assets/robot.gif');
+        background: url('../assets/robot.gif') !important;
         background-color: transparent !important;
         mask-image: none;
-        margin-bottom: 14px;
-    }
-
-    &.creator {
-        transform: scale(1.5);
         margin-bottom: 14px;
     }
 }
@@ -51,12 +48,16 @@
 
 .face-left .user-badge:has(img[alt="Modérateur"]),
 .face-left .user-badge:has(img[alt^="Fondateur"]),
+.face-left .user-badge:has(img[alt^="cheer"]),
+.face-left .user-badge:has(img[alt="VIP"]),
+.face-left .user-badge:has(img[alt="Prime Gaming"]),
 .face-left .user-badge:has(img[alt="Actuel conducteur de la Hype"]),
 .face-left .user-badge:has(img[alt="Précédent conducteur de la Hype"]),
 .face-left .user-badge:has(img[alt="GlitchCon 2020"]),
 .face-left .user-badge:has(img[alt="Célébration du 15e anniversaire de Minecraft"]),
-.face-left .user-badge:has(img[alt="Borderlands 4 Badge - Vault Symbol"]),
+.face-left .user-badge:has(img[alt^="Borderlands 4 Badge"]),
 .face-left .user-badge:has(img[alt="SUBtember 2024"]),
+.face-left .user-badge:has(img[alt="ZEVENT 2024"]),
 .face-left .user-badge:has(img[alt="Speedons 5 Badge"]),
 .face-left .user-badge:has(img[alt="League of Legends Mid Season Invitational 2025"]),
 .face-left .user-badge:has(img[alt="Casque du Loup enragé"]),
@@ -76,10 +77,10 @@
 
 .user-container:has(.creator) {
     z-index: 3;
+    left: 40vw !important;
 
     & .user-badge {
-        bottom: 44px;
-        mix-blend-mode: luminosity;
+        display: none;
     }
 }
 
@@ -102,28 +103,14 @@
 .user-container:has(img[alt="Modérateur"]) {
     z-index: 2;
 
-    & .user-badge {
-        content: url('../assets/sword.gif');
-        bottom: 25px;
+    & .user-body {
+        background: none;
+        background-color: transparent !important;
     }
-}
-
-.user-container:has(img[alt="VIP"]) {
-    z-index: 2;
 
     & .user-badge {
-        content: url('../assets/vip.gif');
-        padding-bottom: 43px;
-    }
-}
-
-.user-container:has(img[alt="Actuel conducteur de la Hype"]) {
-    z-index: 2;
-    left: 80vw !important;
-
-    & .user-badge {
-        content: url('../assets/gilet-jaune.gif');
-        padding-bottom: 2px;
+        content: url('../assets/banana.gif');
+        bottom: 24px;
     }
 }
 
@@ -149,7 +136,7 @@
     }
 }
 
-.user-container:has(img[alt="Borderlands 4 Badge - Vault Symbol"]) {
+.user-container:has(img[alt^="Borderlands 4 Badge"]) {
     & .user-body {
         background: none !important;
     }
@@ -157,6 +144,26 @@
     & .user-badge {
         content: url('../assets/borderlands.gif');
         bottom: 24px;
+    }
+}
+
+.user-container:has(img[alt="VIP"]) {
+    z-index: 2;
+
+    & .user-badge {
+        content: url('../assets/vip.gif');
+        padding-bottom: 42px;
+        padding-right: 1px;
+    }
+}
+
+.user-container:has(img[alt="Actuel conducteur de la Hype"]) {
+    z-index: 2;
+    left: 80vw !important;
+
+    & .user-badge {
+        content: url('../assets/gilet-jaune.gif');
+        padding-bottom: 2px;
     }
 }
 
@@ -171,15 +178,36 @@
     padding-right: 33px;
 }
 
-.user-badge:has(img[alt="La Velada del Año IV"])
-.user-badge:has(img[alt="LEGENDUS"]) {
+.user-badge:has(img[alt="La Velada del Año IV"]) {
     content: url('../assets/boxing.gif');
     padding-bottom: 9px;
+    padding-left: 12px;
+}
+
+.user-badge:has(img[alt="LEGENDUS"]) {
+    content: url('../assets/ryu.gif');
+    padding-bottom: 0px;
+    padding-left: 8px;
+}
+
+.user-badge:has(img[alt="SuperUltraCombo 2023"]) {
+    content: url('../assets/vs.gif');
+    width: 18px;
+    height: 18px;
+    padding-bottom: 6px;
+}
+
+.user-badge:has(img[alt="Gâteau r/place 2023"]) {
+    content: url('../assets/cake.gif');
+    width: 18px;
+    height: 18px;
+    padding-bottom: 8px;
 }
 
 .user-badge:has(img[alt="Prime Gaming"]) {
     content: url('../assets/prime.gif');
-    padding-bottom: 41px;
+    padding-bottom: 42px;
+    padding-right: 6px;
 }
 
 .user-badge:has(img[alt="Vérifié"]) {
@@ -207,23 +235,23 @@
 }
 
 .user-badge:has(img[alt^="cheer"]) {
-    mix-blend-mode: multiply;
+    content: url('../assets/pompom.gif');
 }
 
 .user-badge:has(img[alt="Coureur de la révélation de Marathon"]) {
-    mix-blend-mode: color-burn;
-    padding-bottom: 3px;
+    content: url('../assets/cat.gif');
+    padding-bottom: 38px;
 }
 
 .user-badge:has(img[alt="Casque du Loup enragé"]) {
     content: url('../assets/eldenring-1.gif');
-    padding-bottom: 25px;
-    padding-right: 3px;
+    padding-bottom:17px;
+    padding-left: 1px;
 }
 
 .user-badge:has(img[alt="Badge de clip Elden Ring Nightreign de Rôdeur"]) {
-    content: url('../assets/eldenring-2.gif');
-    padding-bottom: 13px;
+    content: url('../assets/sword.gif');
+    bottom: 24px;
 }
 
 .user-badge:has(img[alt="Badge Elden Ring SuperFan d'Anachorète"]) {
@@ -248,8 +276,8 @@
 
 .user-badge:has(img[alt="ZEVENT 2024"]) {
     content: url('../assets/zevent.gif');
-    padding-bottom: 11px;
-    mix-blend-mode: multiply;
+    padding-bottom: 35px;
+    padding-left: 2px;
 }
 
 .user-badge:has(img[alt="Écoute uniquement"]),
@@ -260,6 +288,10 @@
 .user-badge:has(img[alt="Regarde sans le son"]) {
     mix-blend-mode: lighten;
     padding-bottom: 3px;
+}
+
+.user-badge:has(img[alt^="Rétrospective Twitch"]) {
+    display: none;
 }
 
 .user-message {
@@ -353,11 +385,11 @@
     z-index: -1;
     
     &.arrive {
-        animation: 'train-arrive' 1s ease-out 1 forwards;
+        animation: 'train-arrive' 2s ease-out 1 forwards;
     }
 
     &.depart {
-        animation: 'train-depart' 1s ease-in 1 forwards;
+        animation: 'train-depart' 2s ease-in 1 forwards;
     }
 }
 
@@ -395,8 +427,9 @@
     0% {
         left: -100vw;
     }
-    99% {
+    50% {
         left: 0;
+        z-index: -1;
     }
     100% {
         z-index: 5;
@@ -405,10 +438,11 @@
 
 @keyframes train-depart {
     0% {
-        z-index: -1;
+        z-index: 5;
     }
-    1% {
+    50% {
         left: 0;
+        z-index: -1;
     }
     99% {
         left: 100vw;
