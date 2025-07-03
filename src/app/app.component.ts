@@ -52,13 +52,16 @@ export class AppComponent implements OnDestroy {
           const badgesHtml = data.badges.join("");
           let status = 'nosub';
           if (badgesHtml.search('Fondateur') > -1 ||
-              badgesHtml.search('Modérateur') > -1 ||
               badgesHtml.search('Vérifié') > -1 ||
               badgesHtml.search('Abonn') > -1 ||
               badgesHtml.search('VIP') > -1 ||
               badgesHtml.search('cheer') > -1) {
             status = 'subbed'
-            if (data.user == 'WizeBot' || data.user == 'WZBot' || data.user == 'Nightbot' || data.user == 'StreamElements' || data.user == 'Moobot' || data.user == 'Fossabot') {
+          }
+          if (badgesHtml.search('Modérateur') > -1) {
+            status = 'modo'
+            const knownBots = ['StreamElements', 'Streamlabs', 'Nightbot', 'Moobot', 'Fossabot', 'WizeBot', 'WZBot', 'OWN3D', 'TangiaBot', 'CreatisBot', 'diex'];
+            if (knownBots.includes(data.user)) {
               status = 'bot'
             }
           }

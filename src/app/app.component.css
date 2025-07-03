@@ -35,10 +35,16 @@
     }
 
     &.bot {
-        background: url('../assets/robot.gif') !important;
-        background-color: transparent !important;
-        mask-image: none;
+        background: url('../assets/robot.gif');
+        mask-image: url('../assets/robot.gif');
         margin-bottom: 14px;
+    }
+
+    &.modo {
+        height: 64px;
+        width: 64px;
+        background-image: url('../assets/banana.gif');
+        background-color: transparent !important;
     }
 }
 
@@ -84,7 +90,8 @@
     }
 }
 
-.user-container:has(.bot) {
+.user-container:has(.bot),
+.user-container:has(.modo) {
     z-index: 2;
 
     & .user-badge {
@@ -97,20 +104,6 @@
 
     & .user-badge {
         bottom: 31px;
-    }
-}
-
-.user-container:has(img[alt="Modérateur"]) {
-    z-index: 2;
-
-    & .user-body {
-        background: none;
-        background-color: transparent !important;
-    }
-
-    & .user-badge {
-        content: url('../assets/banana.gif');
-        bottom: 24px;
     }
 }
 
