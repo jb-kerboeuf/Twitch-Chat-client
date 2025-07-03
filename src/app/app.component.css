@@ -52,11 +52,11 @@
     transform: scaleX(-1);
 }
 
-.face-left .user-badge:has(img[alt="Modérateur"]),
 .face-left .user-badge:has(img[alt^="Fondateur"]),
 .face-left .user-badge:has(img[alt^="cheer"]),
 .face-left .user-badge:has(img[alt="VIP"]),
 .face-left .user-badge:has(img[alt="Prime Gaming"]),
+.face-left .user-badge:has(img[alt="Badge Twitch DJ"]),
 .face-left .user-badge:has(img[alt="Actuel conducteur de la Hype"]),
 .face-left .user-badge:has(img[alt="Précédent conducteur de la Hype"]),
 .face-left .user-badge:has(img[alt="GlitchCon 2020"]),
@@ -65,7 +65,8 @@
 .face-left .user-badge:has(img[alt="SUBtember 2024"]),
 .face-left .user-badge:has(img[alt="ZEVENT 2024"]),
 .face-left .user-badge:has(img[alt="Speedons 5 Badge"]),
-.face-left .user-badge:has(img[alt="League of Legends Mid Season Invitational 2025"]),
+.face-left .user-badge:has(img[alt="Vive les clips d'hiver"]),
+.face-left .user-badge:has(img[alt^="League of L"]),
 .face-left .user-badge:has(img[alt="Casque du Loup enragé"]),
 .face-left .user-badge:has(img[alt="Badge de clip Elden Ring Nightreign de Rôdeur"]),
 .face-left .user-badge:has(img[alt="Badge Elden Ring SuperFan d'Anachorète"]),
@@ -165,59 +166,13 @@
     padding-bottom: 2px;
 }
 
-.user-badge:has(img[alt="Speedons 5 Badge"]) {
-    content: url('../assets/speedons.gif');
-    padding-bottom: 31px;
-    padding-right: 33px;
-}
-
-.user-badge:has(img[alt="La Velada del Año IV"]) {
-    content: url('../assets/boxing.gif');
-    padding-bottom: 9px;
-    padding-left: 12px;
-}
-
-.user-badge:has(img[alt="LEGENDUS"]) {
-    content: url('../assets/ryu.gif');
-    padding-bottom: 0px;
-    padding-left: 8px;
-}
-
-.user-badge:has(img[alt="SuperUltraCombo 2023"]) {
-    content: url('../assets/vs.gif');
-    width: 18px;
-    height: 18px;
-    padding-bottom: 6px;
-}
-
-.user-badge:has(img[alt="Gâteau r/place 2023"]) {
-    content: url('../assets/cake.gif');
-    width: 18px;
-    height: 18px;
-    padding-bottom: 8px;
-}
-
-.user-badge:has(img[alt="Prime Gaming"]) {
-    content: url('../assets/prime.gif');
-    padding-bottom: 42px;
-    padding-right: 6px;
-}
-
-.user-badge:has(img[alt="Vérifié"]) {
-    mix-blend-mode: luminosity;
-}
-
-.user-badge:has(img[alt="Turbo"]) {
-    mix-blend-mode: luminosity;
+.user-badge:has(img[alt^="Abonné"]) {
+    display: none;
 }
 
 .user-badge:has(img[alt^="Fondateur"]) {
     content: url('../assets/1st.gif');
     padding-bottom: 15px;
-}
-
-.user-badge:has(img[alt^="Abonné"]) {
-    display: none;
 }
 
 .user-badge:has(img[alt="Abonnements offerts"]),
@@ -231,9 +186,42 @@
     content: url('../assets/pompom.gif');
 }
 
+.user-badge:has(img[alt="Speedons 5 Badge"]) {
+    content: url('../assets/speedons.gif');
+    padding-bottom: 31px;
+    padding-right: 33px;
+}
+
 .user-badge:has(img[alt="Coureur de la révélation de Marathon"]) {
     content: url('../assets/cat.gif');
     padding-bottom: 38px;
+}
+
+.user-badge:has(img[alt="ZEVENT 2024"]) {
+    content: url('../assets/zevent.gif');
+    padding-bottom: 35px;
+    padding-left: 2px;
+}
+
+.user-badge:has(img[alt^="Cœur en pixels d"]) {
+    content: url('../assets/heart_gold.gif');
+    padding-bottom: 9px;
+}
+
+.user-badge:has(img[alt^="Cœur en pixels violet"]) {
+    content: url('../assets/heart_purple.gif');
+    padding-bottom: 9px;
+}
+
+.user-badge:has(img[alt^="Cœur en pixels rubis"]) {
+    content: url('../assets/heart_ruby.gif');
+    padding-bottom: 9px;
+}
+
+.user-badge:has(img[alt="LEGENDUS"]) {
+    content: url('../assets/ryu.gif');
+    padding-bottom: 0px;
+    padding-left: 8px;
 }
 
 .user-badge:has(img[alt="Casque du Loup enragé"]) {
@@ -258,19 +246,62 @@
     padding-bottom: 7px;
 }
 
-.user-badge:has(img[alt="League of Legends Mid Season Invitational 2025"]) {
+.user-badge:has(img[alt^="League of L"]) {
     content: url('../assets/lol.gif');
     padding-bottom: 19px;
+}
+
+.user-badge:has(img[alt="SuperUltraCombo 2023"]) {
+    content: url('../assets/vs.gif');
+    width: 18px;
+    height: 18px;
+    padding-bottom: 6px;
+}
+
+.user-badge:has(img[alt="La Velada del Año IV"]) {
+    content: url('../assets/boxing.gif');
+    padding-bottom: 9px;
+    padding-left: 12px;
+}
+
+.user-badge:has(img[alt="Gâteau r/place 2023"]) {
+    content: url('../assets/cake.gif');
+    width: 18px;
+    height: 18px;
+    padding-bottom: 7px;
+}
+
+.user-badge:has(img[alt="Vive les clips d'hiver"]) {
+    content: url('../assets/garland.gif');
+    padding-bottom: 8px;
 }
 
 .user-badge:has(img[alt="Badge Avoir la banane"]) {
     padding-bottom: 37px;
 }
 
-.user-badge:has(img[alt="ZEVENT 2024"]) {
-    content: url('../assets/zevent.gif');
-    padding-bottom: 35px;
-    padding-left: 2px;
+.user-badge:has(img[alt="Prime Gaming"]) {
+    content: url('../assets/prime.gif');
+    padding-bottom: 42px;
+    padding-right: 6px;
+}
+
+.user-badge:has(img[alt^="Artist"]) {
+    content: url('../assets/paint.gif');
+    padding-bottom: 7px;
+}
+
+.user-badge:has(img[alt="Badge Twitch DJ"]) {
+    content: url('../assets/dj.gif');
+}
+
+.user-badge:has(img[alt="Turbo"]) {
+    content: url('../assets/turbo.gif');
+    padding-bottom: 43px;
+}
+
+.user-badge:has(img[alt="Vérifié"]) {
+    mix-blend-mode: luminosity;
 }
 
 .user-badge:has(img[alt="Écoute uniquement"]),
@@ -327,12 +358,11 @@
 
 .user-name {
     width: fit-content;
-    line-height: 20px;
     margin: 0 auto 5px auto;
-    border-radius: 30px;
     font-family: var(--accent-font);
     font-weight: bold;
     font-size: large;
+    line-height: 20px;
     text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 1px 4px #000;
 }
 
