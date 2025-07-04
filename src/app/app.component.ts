@@ -60,8 +60,7 @@ export class AppComponent implements OnDestroy {
           }
           if (badgesHtml.search('Modérateur') > -1) {
             status = 'modo'
-            const knownBots = ['StreamElements', 'Streamlabs', 'Nightbot', 'Moobot', 'Fossabot', 'WizeBot', 'WZBot', 'OWN3D', 'TangiaBot', 'CreatisBot', 'diex'];
-            if (knownBots.includes(data.user)) {
+            if (data.user.search(/^stream|bot$/i) > -1) {
               status = 'bot'
             }
           }

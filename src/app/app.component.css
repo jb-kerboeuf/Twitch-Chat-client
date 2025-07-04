@@ -56,7 +56,7 @@
 .face-left .user-badge:has(img[alt^="cheer"]),
 .face-left .user-badge:has(img[alt="VIP"]),
 .face-left .user-badge:has(img[alt="Prime Gaming"]),
-.face-left .user-badge:has(img[alt="Badge Twitch DJ"]),
+.face-left .user-badge:has(img[alt="Twitch DJ"]),
 .face-left .user-badge:has(img[alt="Actuel conducteur de la Hype"]),
 .face-left .user-badge:has(img[alt="Précédent conducteur de la Hype"]),
 .face-left .user-badge:has(img[alt="GlitchCon 2020"]),
@@ -172,11 +172,12 @@
 
 .user-badge:has(img[alt^="Fondateur"]) {
     content: url('../assets/1st.gif');
-    padding-bottom: 15px;
+    padding-bottom: 8px;
 }
 
 .user-badge:has(img[alt="Abonnements offerts"]),
-.user-badge:has(img[alt$="abonnements-cadeaux"]) {
+.user-badge:has(img[alt$="abonnements-cadeaux"]),
+.user-badge:has(img[alt^="Gifter"]) {
     background-image: url('../assets/gift-shadow.gif');
     background-repeat: no-repeat;
     background-position-y: -1px;
@@ -276,6 +277,11 @@
     padding-bottom: 8px;
 }
 
+.user-badge:has(img[alt="SUBtember 2024"]) {
+    padding-bottom: 21px;
+    padding-left: 3px;
+}
+
 .user-badge:has(img[alt="Badge Avoir la banane"]) {
     padding-bottom: 37px;
 }
@@ -291,7 +297,7 @@
     padding-bottom: 7px;
 }
 
-.user-badge:has(img[alt="Badge Twitch DJ"]) {
+.user-badge:has(img[alt="Twitch DJ"]) {
     content: url('../assets/dj.gif');
 }
 
@@ -304,8 +310,7 @@
     mix-blend-mode: luminosity;
 }
 
-.user-badge:has(img[alt="Écoute uniquement"]),
-.user-badge:has(img[alt="SUBtember 2024"]) {
+.user-badge:has(img[alt="Écoute uniquement"]){
     padding-bottom: 21px;
 }
 
@@ -323,8 +328,8 @@
     max-width: 100%;
     max-height: 300px;
     margin: 0 auto 10px auto;
-    background-color: color-mix(in srgb, var(--accent-color) 35%, transparent);
-    border: 2px solid var(--accent-color);
+    background-color: color-mix(in srgb, var(--secondary-color) 35%, transparent);
+    border: 2px solid var(--secondary-color);
     overflow: hidden;
     border-radius: 20px;
     box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 0.5);
@@ -339,7 +344,7 @@
 
 .user-message:has(> .message-announce) {
     border: 8px solid !important;
-    border-image-source: linear-gradient(color-mix(in srgb, var(--accent-color) 75%, #fff), var(--accent-color)) !important;
+    border-image-source: linear-gradient(var(--accent-color), var(--secondary-color)) !important;
     border-radius: 26px;
 }
 
@@ -359,7 +364,7 @@
 .user-name {
     width: fit-content;
     margin: 0 auto 5px auto;
-    font-family: var(--accent-font);
+    font-family: var(--secondary-font);
     font-weight: bold;
     font-size: large;
     line-height: 20px;
@@ -386,11 +391,11 @@
 .message-highlighted,
 .message-notice,
 .message-animated {
-    font-family: var(--accent-font);
+    font-family: var(--secondary-font);
     font-weight: bold;
     font-size: x-large;
     font-variant-caps: small-caps;
-    color: var(--accent-color);
+    color: var(--secondary-color);
 }
 
 .message-notice {

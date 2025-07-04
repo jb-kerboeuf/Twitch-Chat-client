@@ -1,7 +1,8 @@
 :root {
     --default-font: 'GG Sans semibold', 'Futura', sans-serif;
-    --accent-font: 'Jersey 10', 'Impact', sans-serif;
-    --accent-color: rebeccapurple;
+    --secondary-font: 'Jersey 10', 'Impact', sans-serif;
+    --secondary-color: rebeccapurple;
+    --accent-color: darksalmon;
 }
 
 * {
@@ -16,7 +17,7 @@ body {
 }
 
 a {
-    color: var(--accent-color);
+    color: var(--secondary-color);
     text-wrap: nowrap;
 }
 
@@ -26,10 +27,18 @@ button {
 }
 
 .mention-fragment {
+    color: var(--secondary-color);
+}
+
+.chatter-name {
     color: var(--accent-color);
 }
 
-img[alt="Écoute uniquement"],
+img[alt="Vérifié"],
+img[alt="Écoute uniquement"] {
+    border-radius: 10px;
+}
+
 img[alt="SUBtember 2024"] {
-    border-radius: 7px;
+    border-radius: 10px 5px 5px 10px;
 }
