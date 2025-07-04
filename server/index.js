@@ -133,7 +133,7 @@ io.on('connection', (socket) => {
                     newMessages.at(i).message.id = uid;
                     uid++;
                     lastExtractedMessage = newMessages.at(i);
-                    io.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
+                    socket.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
                 }
             }
         }
