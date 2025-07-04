@@ -10,10 +10,15 @@
     padding: 0;
 }
 
+html {
+    overflow: hidden
+}
+
 body {
     background-color: transparent;
     font-family: var(--default-font);
     color: #222;
+    overflow: hidden
 }
 
 a {

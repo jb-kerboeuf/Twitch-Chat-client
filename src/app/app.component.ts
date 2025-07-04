@@ -52,7 +52,6 @@ export class AppComponent implements OnDestroy {
           const badgesHtml = data.badges.join("");
           let status = 'nosub';
           if (badgesHtml.search('Fondateur') > -1 ||
-              badgesHtml.search('Vérifié') > -1 ||
               badgesHtml.search('Abonn') > -1 ||
               badgesHtml.search('VIP') > -1 ||
               badgesHtml.search('cheer') > -1) {
@@ -63,6 +62,9 @@ export class AppComponent implements OnDestroy {
             if (data.user.search(/^stream|bot$/i) > -1) {
               status = 'bot'
             }
+          }
+          if (badgesHtml.search('Vérifié') > -1 && data.user.search(/^stream|bot$/i) > -1) {
+              status = 'bot'
           }
           if (badgesHtml.search('Diffuseur') > -1) {
             status = 'creator'
