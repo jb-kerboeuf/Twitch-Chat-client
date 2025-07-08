@@ -1,7 +1,7 @@
 <div class="le-chat">
 
   @for (user of chat; track user.name) {
-  <div class="user-container" [class.face-left]="user.mirror" style="left:{{ user.xPosition }}">
+  <div class="user-container" [class.face-left]="user.mirror" style="left:{{ user.xPosition }}; z-index:{{ user.messages[user.messages.length - 1].id }}">
 
     <div class="messages-container">
       @for (msg of user.messages; track msg.id) {

@@ -83,9 +83,6 @@
 }
 
 .user-container:has(.creator) {
-    z-index: 3;
-    left: 40vw !important;
-
     & .user-badge {
         display: none;
     }
@@ -93,16 +90,12 @@
 
 .user-container:has(.bot),
 .user-container:has(.modo) {
-    z-index: 2;
-
     & .user-badge {
         display: none;
     }
 }
 
 .user-container:has(.subbed) {
-    z-index: 1;
-
     & .user-badge {
         bottom: 31px;
     }
@@ -141,18 +134,7 @@
     }
 }
 
-.user-container:has(img[alt="VIP"]) {
-    z-index: 2;
-
-    & .user-badge {
-        content: url('../assets/vip.gif');
-        padding-bottom: 42px;
-        padding-right: 1px;
-    }
-}
-
 .user-container:has(img[alt="Actuel conducteur de la Hype"]) {
-    z-index: 2;
     left: 80vw !important;
 
     & .user-badge {
@@ -173,6 +155,12 @@
 .user-badge:has(img[alt^="Fondateur"]) {
     content: url('../assets/1st.gif');
     padding-bottom: 8px;
+}
+
+.user-badge:has(img[alt="VIP"]) {
+    content: url('../assets/vip.gif');
+    padding-bottom: 42px;
+    padding-right: 1px;
 }
 
 .user-badge:has(img[alt="Abonnements offerts"]),
@@ -279,7 +267,7 @@
 
 .user-badge:has(img[alt="SUBtember 2024"]) {
     padding-bottom: 21px;
-    padding-left: 3px;
+    padding-left: 2px;
 }
 
 .user-badge:has(img[alt="Badge Avoir la banane"]) {
@@ -435,11 +423,11 @@
         opacity: 0;
         transform: scale(0, 0);
     }
-    1% {
+    2% {
         opacity: 1;
         transform: scale(1, 1);
     }
-    50% {
+    35% {
         opacity: 1;
     }
     99% {
@@ -460,13 +448,13 @@
         z-index: -1;
     }
     100% {
-        z-index: 5;
+        z-index: 50000;
     }
 }
 
 @keyframes train-depart {
     0% {
-        z-index: 5;
+        z-index: 50000;
     }
     50% {
         left: 0;
