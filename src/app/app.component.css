@@ -13,13 +13,13 @@
     height: 56px;
     width: 56px;
     margin: 0 auto;
-    background-size: contain;
+    background-size: contain !important;
     mask-size: contain;
     background-blend-mode: hard-light;
 
     &.creator {
-        height: 96px;
-        width: 96px;
+        height: 64px;
+        width: 64px;
         background: url('../assets/buddy_jump.gif');
         mask-image: url('../assets/buddy_jump.gif');
     }
@@ -108,6 +108,8 @@
     }
 
     & .user-badge {
+        height: 56px;
+        width: 56px;
         content: url('../assets/minecraft.gif');
         bottom: 24px;
     }
@@ -119,6 +121,8 @@
     }
 
     & .user-badge {
+        height: 56px;
+        width: 56px;
         content: url('../assets/dino.gif');
         bottom: 24px;
     }
@@ -130,6 +134,8 @@
     }
 
     & .user-badge {
+        height: 56px;
+        width: 56px;
         content: url('../assets/borderlands.gif');
         bottom: 24px;
     }
@@ -218,7 +224,7 @@
 .user-badge:has(img[alt="Casque du Loup enragé"]) {
     content: url('../assets/eldenring-1.gif');
     padding-bottom:17px;
-    padding-left: 2px;
+    padding-left: 1px;
 }
 
 .user-badge:has(img[alt="Badge de clip Elden Ring Nightreign de Rôdeur"]) {
