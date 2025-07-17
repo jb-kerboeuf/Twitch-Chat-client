@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
                         messageArray.push({
                             train: !!hypeTrainNode,
                             user: userNode ? userNode.textContent : "???",
-                            color: "var(--accent-color)",
+                            color: null,
                             badges: [],
                             message: {
                                 type: 'notice',
@@ -77,7 +77,7 @@ io.on('connection', (socket) => {
                             messageArray.push({
                                 train: !!hypeTrainNode,
                                 user: userNode ? userNode.textContent : "???",
-                                color: userNode ? userNode.style.color : "var(--accent-color)",
+                                color: userNode ? userNode.style.color : null,
                                 badges: badges,
                                 message: {
                                     type: 'announce',
@@ -92,10 +92,10 @@ io.on('connection', (socket) => {
                             messageArray.push({
                                 train: !!hypeTrainNode,
                                 user: userNode ? userNode.textContent : "???",
-                                color: userNode ? userNode.style.color : "var(--accent-color)",
+                                color: userNode ? userNode.style.color : null,
                                 badges: badges,
                                 message: {
-                                    type: highlighted ? 'highlight' : animated ? 'animated' : 'message',
+                                    type: animated ? 'animated' : highlighted ? 'highlight' : 'message',
                                     quote: quoteNode ? quoteNode.innerHTML.replace('Répond à ', '').replaceAll('@', '&#64;') : null,
                                     text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
                                 }

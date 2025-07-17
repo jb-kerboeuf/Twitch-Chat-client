@@ -39,6 +39,11 @@ button {
     color: var(--accent-color);
 }
 
+.chat-image__container:has(img.chat-line__message--emote) {
+    max-height: 28px;
+    margin: 4px 0;
+}
+
 img[alt="Vérifié"],
 img[alt="Écoute uniquement"] {
     border-radius: 10px;

@@ -39,9 +39,8 @@ export class AppComponent implements OnDestroy {
         const idx = this.users.indexOf(data.user);
         if (idx > -1) {
           this.chat[idx].messages.push(data.message);
-          this.chat[idx].color = data.color;
+          if (data.color) this.chat[idx].color = data.color;
           this.chat[idx].badge = data.badges.length > 1 && data.badges[0].search('Abonné') > -1 ? data.badges[1] : data.badges[0];
-          // TODO pop up in front
           let overChating = this.chat[idx].messages.length - 5;
           for (var i = 0; i < overChating; i++) {
             document.querySelector('.user-message')?.remove();
@@ -72,10 +71,10 @@ export class AppComponent implements OnDestroy {
           this.users.push(data.user);
           this.chat.push({
             name: data.user,
-            color: data.color,
+            color: data.color? data.color : 'var(--accent-color)',
             badge: data.badges.length > 1 && data.badges[0].search('Abonné') > -1 ? data.badges[1] : data.badges[0],
             status: status,
-            xPosition: `${Math.round(Math.random() * 80)}vw`,
+            xPosition: `${Math.round(Math.random() * 1300)}px`,
             mirror: Math.random() > 0.5,
             messages: [data.message]
           });
