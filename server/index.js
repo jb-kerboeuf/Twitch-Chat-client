@@ -134,6 +134,7 @@ io.on('connection', (socket) => {
                     uid++;
                     lastExtractedMessage = newMessages.at(i);
                     socket.emit('message', newMessages.at(i)); // Broadcasting the message to all clients
+                    await delay(100);
                 }
             }
         }

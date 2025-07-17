@@ -54,6 +54,7 @@
 
 .face-left .user-badge:has(img[alt^="Fondateur"]),
 .face-left .user-badge:has(img[alt^="cheer"]),
+.face-left .user-badge:has(img[alt^="Leader en bits"]),
 .face-left .user-badge:has(img[alt="VIP"]),
 .face-left .user-badge:has(img[alt="Prime Gaming"]),
 .face-left .user-badge:has(img[alt="Twitch DJ"]),
@@ -171,7 +172,8 @@
     background-position-y: -1px;
 }
 
-.user-badge:has(img[alt^="cheer"]) {
+.user-badge:has(img[alt^="cheer"]),
+.user-badge:has(img[alt^="Leader en bits"]) {
     content: url('../assets/pompom.gif');
 }
 
@@ -216,7 +218,7 @@
 .user-badge:has(img[alt="Casque du Loup enragé"]) {
     content: url('../assets/eldenring-1.gif');
     padding-bottom:17px;
-    padding-left: 1px;
+    padding-left: 2px;
 }
 
 .user-badge:has(img[alt="Badge de clip Elden Ring Nightreign de Rôdeur"]) {
@@ -313,34 +315,46 @@
 
 .user-message {
     width: fit-content;
+    min-width: 40px;
     max-width: 100%;
-    max-height: 300px;
-    margin: 0 auto 10px auto;
+    margin: 0 auto 20px auto;
     background-color: color-mix(in srgb, var(--secondary-color) 35%, transparent);
     border: 2px solid var(--secondary-color);
-    overflow: hidden;
-    border-radius: 20px;
+    border-radius: 26px;
     box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 0.5);
     opacity: 0;
     animation: 'bubble' 20s ease-in-out 1 forwards;
 }
 
+.pointer {
+	height: 16px;
+	width: 16px;
+	transform: rotate(45deg) scale(0);
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 16px;
+    position: absolute;
+    left: calc(50% - 8px);
+    bottom: -8px;
+    z-index: -1;
+    animation: 'pointer' 4s ease-in-out 1 forwards;
+}
+
 .user-message:has(> .message-highlighted) {
-    border-width: 3px;
-    border-radius: 21px;
+    border-width: 4px;
+    border-radius: 28px;
 }
 
 .user-message:has(> .message-announce) {
     border: 8px solid !important;
     border-image-source: linear-gradient(var(--accent-color), var(--secondary-color)) !important;
-    border-radius: 26px;
+    border-radius: 32px;
 }
 
 .user-message:has(> .message-notice) {
     border: none;
     background: none;
     box-shadow: none;
-    max-height: 420px;
     text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff, 0 1px 4px #000;
 }
 
@@ -369,11 +383,21 @@
 }
 
 .message-text {
+    min-height: 20px;
+    max-height: 300px;
     text-wrap: balance;
     background-image: url('../assets/pastel_background.png');
     background-size: 100% 150%;
-    border-radius: 18px;
+    border-radius: 24px;
     padding: 6px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-message:has(> .message-quote) {
+    & .message-text {
+        border-radius: 10px 10px 24px 24px;
+    }
 }
 
 .message-highlighted,
@@ -411,11 +435,50 @@
 
 .hype-train {
     position: absolute;
-    left: 6vw;
+    left: 86px;
 }
 
 .train-tag {
     mix-blend-mode: color-dodge;
+}
+
+@keyframes pointer {
+    0% {
+        transform: rotate(45deg) scale(0.5);
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 0px;
+    }
+    15% {
+        transform: rotate(45deg) scale(1);
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 6px;
+        border-bottom-left-radius: 0px;
+    }
+    85% {
+        transform: rotate(45deg) scale(1);
+        border-top-right-radius: 6px;
+        border-bottom-right-radius: 4px;
+        border-bottom-left-radius: 6px;
+    }
+    92% {
+        transform: rotate(45deg) scale(1);
+        border-top-right-radius: 8px;
+        border-bottom-right-radius: 2px;
+        border-bottom-left-radius: 8px;
+    }
+    95% {
+        transform: rotate(45deg) scale(1);
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 0px;
+    }
+    100% {
+        transform: rotate(45deg) scale(0);
+        border-top-right-radius: 0px;
+        border-bottom-right-radius: 16px;
+        border-bottom-left-radius: 0px;
+    }
 }
 
 @keyframes bubble {
