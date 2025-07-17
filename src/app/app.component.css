@@ -21,17 +21,17 @@
         height: 64px;
         width: 64px;
         background: url('../assets/buddy_jump.gif');
-        mask-image: url('../assets/buddy_jump_mask.gif');
+        mask-image: url('../assets/buddy_jump.gif');
     }
 
     &.subbed {
         background: url('../assets/buddy_idle.gif');
-        mask-image: url('../assets/buddy_idle_mask.gif');
+        mask-image: url('../assets/buddy_idle.gif');
     }
 
     &.nosub {
         background: url('../assets/buddy_sit.gif');
-        mask-image: url('../assets/buddy_sit_mask.gif');
+        mask-image: url('../assets/buddy_sit.gif');
     }
 
     &.bot {
