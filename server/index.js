@@ -48,6 +48,18 @@ io.on('connection', (socket) => {
             let chat = await page.evaluate(() => {
                 const messageNodeList = document.querySelectorAll('.chat-line__message, .user-notice-line, .announcement-line');
                 const hypeTrainNode = document.querySelector('.hype-train__banner');
+                let hypeTrain = {'status': 'no-hype'};
+                if (hypeTrainNode) {
+                    const lvl = hypeTrainNode.innerHTML.match(/(?<=Niv. )\d+/g);
+                    const remain = hypeTrainNode.innerHTML.match(/\d+:\d+/g);
+                    const progress = hypeTrainNode.innerHTML.match(/\d+(?=%)/g);
+                    hypeTrain = {
+                        'lvl': lvl ? parseInt(lvl[0]) : null,
+                        'progress': lvl ? progress ? parseInt(progress[0]) : null : null,
+                        'remain': remain ? remain[0] : null,
+                        'status': remain && !lvl ? 'arrive' : 'hype'
+                    }
+                }
 
                 let messageArray = [];
                 for (m of messageNodeList) {
@@ -55,7 +67,7 @@ io.on('connection', (socket) => {
                     const noticeNode = m.querySelector('.dJfBsr, .hDlHnO'); // Warning: prone to change
                     if (noticeNode) {
                         messageArray.push({
-                            train: !!hypeTrainNode,
+                            train: hypeTrain,
                             user: userNode ? userNode.textContent : "???",
                             color: null,
                             badges: [],
@@ -75,7 +87,7 @@ io.on('connection', (socket) => {
                         const announceNode = m.querySelector('.jmdYJS'); // Warning: prone to change
                         if (announceNode) {
                             messageArray.push({
-                                train: !!hypeTrainNode,
+                                train: hypeTrain,
                                 user: userNode ? userNode.textContent : "???",
                                 color: userNode ? userNode.style.color : null,
                                 badges: badges,
@@ -90,7 +102,7 @@ io.on('connection', (socket) => {
                             const animated = m.querySelector('.animatedMessageContainer');
                             const quoteNode = m.querySelector('.eWyliK, .iWlGez'); // Warning: prone to change
                             messageArray.push({
-                                train: !!hypeTrainNode,
+                                train: hypeTrain,
                                 user: userNode ? userNode.textContent : "???",
                                 color: userNode ? userNode.style.color : null,
                                 badges: badges,

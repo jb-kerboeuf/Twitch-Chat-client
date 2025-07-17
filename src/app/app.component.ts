@@ -29,7 +29,12 @@ export class AppComponent implements OnDestroy {
   private messageSubscription: Subscription;
   chat: UserData[] = [];
   users: string[] = [];
-  train: boolean = false;
+  train: {
+    'status': string,
+    'lvl'?: number,
+    'progress'?: number,
+    'remain'?: string
+  } = {'status': 'no-hype'};
 
   constructor(private socketService: SocketService) {
     this.messageSubscription = this.socketService
