@@ -69,7 +69,7 @@ io.on('connection', (socket) => {
                     if (noticeNode) {
                         messageArray.push({
                             train: hypeTrain,
-                            user: userNode ? userNode.textContent : "???",
+                            user: userNode ? userNode.textContent : "_",
                             color: null,
                             badges: [],
                             message: {
@@ -89,7 +89,7 @@ io.on('connection', (socket) => {
                         if (announceNode) {
                             messageArray.push({
                                 train: hypeTrain,
-                                user: userNode ? userNode.textContent : "???",
+                                user: userNode ? userNode.textContent : "_",
                                 color: userNode ? userNode.style.color : null,
                                 badges: badges,
                                 message: {
@@ -104,13 +104,13 @@ io.on('connection', (socket) => {
                             const quoteNode = m.querySelector('.eWyliK, .iWlGez'); // Warning: prone to change
                             messageArray.push({
                                 train: hypeTrain,
-                                user: userNode ? userNode.textContent : "???",
+                                user: userNode ? userNode.textContent : "_",
                                 color: userNode ? userNode.style.color : null,
                                 badges: badges,
                                 message: {
                                     type: animated ? 'animated' : highlighted ? 'highlight' : 'message',
                                     quote: quoteNode ? quoteNode.innerHTML.replace('Répond à ', '').replaceAll('@', '&#64;') : null,
-                                    text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : ""
+                                    text: textNode ? textNode.innerHTML.replaceAll('@', '&#64;') : m.innerHTML.replaceAll('@', '&#64;')
                                 }
                             });
                         }
