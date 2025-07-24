@@ -17,6 +17,13 @@ interface UserData {
     text: string;
   }[]
 }
+const defaultTrain = {
+  'status': 'no-hype',
+  'lvl': 0,
+  'prevlvl': null,
+  'progress': null,
+  'remain': ''
+}
 
 @Component({
   selector: 'app-root',
@@ -31,16 +38,29 @@ export class AppComponent implements OnDestroy {
   users: string[] = [];
   train: {
     'status': string,
-    'lvl'?: number,
-    'progress'?: number,
-    'remain'?: string
-  } = {'status': 'no-hype'};
+    'lvl': number,
+    'prevlvl': number | null,
+    'progress': number | null,
+    'remain': string
+  } = defaultTrain;
 
   constructor(private socketService: SocketService) {
     this.messageSubscription = this.socketService
       .on('message')
       .subscribe((data) => {
-        this.train = data.train;
+        this.train.status = data.train.status;
+        if (this.train.status != 'no-hype') {
+          if (data.train.progress) this.train.progress = data.train.progress;
+          if (data.train.remain) this.train.remain = data.train.remain;
+          if (data.train.lvl) {
+            this.train.lvl = data.train.lvl;
+            this.train.prevlvl = data.train.lvl - 1;
+          }
+        }
+        else {
+          this.train = defaultTrain;
+        }
+
         const idx = this.users.indexOf(data.user);
         if (idx > -1) {
           this.chat[idx].messages.push(data.message);

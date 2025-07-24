@@ -326,7 +326,7 @@
     min-width: 40px;
     max-width: 100%;
     margin: 0 auto 20px auto;
-    background-color: color-mix(in srgb, var(--secondary-color) 35%, transparent);
+    background-color: color-mix(in srgb, var(--secondary-color) 50%, transparent);
     border: 2px solid var(--secondary-color);
     border-radius: 26px;
     box-shadow: 0px 10px 15px -10px rgba(0, 0, 0, 0.5);
@@ -434,6 +434,7 @@
 
 .hype-train-container {
     position: absolute;
+    left: 84px;
     bottom: 10px;
     z-index: -1;
     
@@ -450,13 +451,65 @@
     }
 }
 
-.hype-train {
+.hype-train,
+.progress-container,
+#train_windows {
     position: absolute;
-    left: 86px;
 }
 
+.hype-train {
+    display: flex;
+}
+
+.progress-container {
+    display: ruby;
+    width: 1428px;
+    height: 100%;
+    background-color: transparent;
+    mask-image: url('../assets/train_mask.gif');
+    mask-repeat: no-repeat;
+    mix-blend-mode: overlay;
+}
+
+.progress-bar {
+    height: 100%;
+}
+
+.lvl-1 { background-color: #a46a23 }
+.lvl-2 { background-color: #528431 }
+.lvl-3 { background-color: #008b84 }
+.lvl-4 { background-color: #007ccc }
+.lvl-5 { background-color: #8c66b8 }
+.lvl-6 { background-color: #c44f6a }
+.lvl-7, .lvl-17 { background-color: #ff846b }
+.lvl-8, .lvl-18 { background-color: #fda629 }
+.lvl-9, .lvl-19 { background-color: #b4c21e }
+.lvl-10, .lvl-20 { background-color: #44d263 }
+.lvl-11, .lvl-21 { background-color: #00d9b7 }
+.lvl-12, .lvl-22 { background-color: #00d7ff }
+.lvl-13, .lvl-23 { background-color: #81b2ff }
+.lvl-14, .lvl-24 { background-color: #d99cff }
+.lvl-15, .lvl-25 { background-color: #ff8dff }
+.lvl-16, .lvl-26 { background-color: #ff74bc }
+
 .train-tag {
-    mix-blend-mode: color-dodge;
+    mix-blend-mode: darken;
+}
+
+.hype-time {
+  position: absolute;
+  right: -50px;
+  bottom: 100px;
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  font-size: x-large;
+  color: #fff;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000, 0 1px 4px #000;
+}
+
+#train_windows {
+    opacity: 10%;
+    z-index: -2;
 }
 
 @keyframes pointer {
@@ -517,7 +570,7 @@
         left: -100vw;
     }
     100% {
-        left: 0;
+        left: 84px;
     }
 }
 
@@ -535,7 +588,7 @@
         z-index: 50000;
     }
     50% {
-        left: 0;
+        left: 84px;
         z-index: -1;
     }
     99% {

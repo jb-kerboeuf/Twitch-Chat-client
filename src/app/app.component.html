@@ -24,6 +24,8 @@
   }
 
   <div [ngClass]="['hype-train-container', train.status]">
+    <div class="hype-time">{{ train.remain }}</div>
+    <img src="/assets/train_windows.gif" id="train_windows">
     <div class="hype-train">
       <img src="/assets/train_last.gif">
       <img src="/assets/train_door.gif">
@@ -42,6 +44,10 @@
       <img src="/assets/train_wagon.gif">
       <img src="/assets/train_wagon.gif">
       <img src="/assets/train_loco.gif">
+    </div>
+    <div class="progress-container">
+      <div [ngClass]="['progress-bar', 'lvl-'+train.lvl]" style="width:{{ train.progress }}%"></div>
+      <div [ngClass]="['progress-bar', 'lvl-'+train.prevlvl]" style="width:100%"></div>
     </div>
     <div class="train-tag"><img src="/assets/train_tag.png"></div>
   </div>
