@@ -62,7 +62,8 @@
 .face-left .user-badge:has(img[alt="Précédent conducteur de la Hype"]),
 .face-left .user-badge:has(img[alt="GlitchCon 2020"]),
 .face-left .user-badge:has(img[alt="Célébration du 15e anniversaire de Minecraft"]),
-.face-left .user-badge:has(img[alt^="Borderlands 4 Badge"]),
+.face-left .user-badge:has(img[alt^="Borderlands 4"]),
+.face-left .user-badge:has(img[alt^="Badge Borderlands"]),
 .face-left .user-badge:has(img[alt="SUBtember 2024"]),
 .face-left .user-badge:has(img[alt="ZEVENT 2024"]),
 .face-left .user-badge:has(img[alt="Speedons 5 Badge"]),
@@ -128,7 +129,8 @@
     }
 }
 
-.user-container:has(img[alt^="Borderlands 4 Badge"]) {
+.user-container:has(img[alt^="Borderlands 4"]),
+.user-container:has(img[alt^="Badge Borderlands"]) {
     & .user-body {
         background: none !important;
     }
@@ -397,7 +399,7 @@
     max-height: 300px;
     text-wrap: balance;
     background-image: url('../assets/pastel_background.png');
-    background-size: 100% 150%;
+    background-size: 100% 120%;
     border-radius: 24px;
     padding: 6px 10px;
     overflow: hidden;
