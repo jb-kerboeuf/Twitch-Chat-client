@@ -46,7 +46,8 @@ io.on('connection', (socket) => {
         while (true) {
             // Evaluate the page and format messages
             let chat = await page.evaluate(() => {
-                const messageNodeList = document.querySelectorAll('.chat-line__message, .user-notice-line, .announcement-line');
+                let messageNodeList = [...document.querySelectorAll('.chat-line__message, .user-notice-line, .announcement-line')];
+                messageNodeList.slice(-20);
                 const hypeTrainNode = document.querySelector('.hype-train__banner');
                 let hypeTrain = {'status': 'no-hype'};
                 if (hypeTrainNode) {
@@ -134,7 +135,7 @@ io.on('connection', (socket) => {
                 newMessages = chat;
             }
 
-            if (newMessages.length > 20) {
+            if (newMessages.length >= 20) {
                 console.error("Error: lost track of messages");
                 newMessages = chat.slice(-1);
             }
